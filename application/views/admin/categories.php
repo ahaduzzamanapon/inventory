@@ -48,6 +48,9 @@
                         <li>
                             <a href="<?php echo base_url(); ?>admin/subcategories">Sub-Categories</a>
                         </li>
+                        <li >
+                            <a href="<?php echo base_url(); ?>admin/unit">Unit</a>
+                        </li>
                        
                     </ul>
                 </li>
@@ -190,17 +193,12 @@
                                 <?php echo form_open('<?php echo base_url(); ?>/admin/catupdate', 'class="form-horizontal"'); ?>
                                 <input type="hidden" id="id" name="id" value="" />
                                 <div class="form-group">
-                                    <label for="name">Name</label>
+                                    <label for="name">categories Name</label>
                                     <?php echo form_error('name', '<div class="text-danger">', '</div>'); ?>
 
                                     <input type="text" class="form-control" id="name" name="name" value="" required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="email">Email</label>
-                                    <?php echo form_error('email', '<div class="text-danger">', '</div>'); ?>
-
-                                    <input type="email" class="form-control" id="email" name="email" value="" required>
-                                </div>
+                   
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary">Save changes</button>
