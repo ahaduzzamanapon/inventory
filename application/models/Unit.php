@@ -5,7 +5,7 @@ class Unit extends CI_Model {
         $this->load->database();
       
 
-        $query = $this->db->order_by('id', 'desc')->get('units');
+        $query = $this->db->order_by('unitId', 'desc')->get('units');
         return $query->result();
     }
 

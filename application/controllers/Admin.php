@@ -10,6 +10,7 @@ class Admin extends CI_Controller
         $this->load->database();
         $this->load->model('catmodel');
         $this->load->model('subModel');
+        $this->load->model('Unit');
         $this->load->library('session');
         $this->load->helper('url');
     }
@@ -128,7 +129,11 @@ class Admin extends CI_Controller
 
     public function units()
     {
+
         $units = $this->Unit->get_units();
+
+
+
         $data = array('units' => $units,
                         'unitValidation1'=>$this->session->flashdata('unitValidation1'));
         $this->load->view('admin/unit', $data);
