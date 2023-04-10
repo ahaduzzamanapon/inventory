@@ -9,16 +9,15 @@ class catmodel extends CI_Model {
         return $query->result();
     }
 
-    // public function update_user($id, $name, $email)
-    // {
-    //     // Update the user data
-    //     $data = array(
-    //         'name' => $name,
-    //         'email' => $email
-    //     );
-    //     $this->db->where('id', $id);
-    //     $this->db->update('categories', $data);
-    // }
+    public function update_cat($id, $catname)
+    {
+        // Update the user data
+        $data = array(
+            'catname' => $catname,
+        );
+        $this->db->where('id', $id);
+        $this->db->update('categories', $data);
+    }
 
 
     // public function get_user_by_id($id)
@@ -29,12 +28,12 @@ class catmodel extends CI_Model {
     //     return $query->row();
     // }
 
-    // public function delete_user($id)
-    // {
-    //     // Delete the user by ID
-    //     $this->db->where('id', $id);
-    //     $this->db->delete('categories');
-    // }
+    public function delete_categories($id)
+    {
+        // Delete the user by ID
+        $this->db->where('id', $id);
+        $this->db->delete('categories');
+    }
 
 }
 

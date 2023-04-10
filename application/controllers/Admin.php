@@ -27,7 +27,10 @@ class Admin extends CI_Controller {
 
 		$categories = $this->catmodel->get_categories();
 		$data = array('categories' => $categories,
-						'validation1'=>$this->session->flashdata('validation1'));
+					  'validation1'=>$this->session->flashdata('validation1'),
+					  'validation2'=>$this->session->flashdata('validation2'),
+					  'success'=>$this->session->flashdata('success'),
+                    );
 		$this->load->view('admin/categories', $data);  
 
 
@@ -58,10 +61,12 @@ class Admin extends CI_Controller {
 				 $this->load->database();
 
             $this->db->insert('categories', $data);
-            $this->session->set_flashdata('success', 'Record added successfully');
-            $categories = $this->catmodel->get_categories();
-            $data = array('categories' => $categories);
-            $this->load->view('admin/categories', $data);        
+
+            $this->load->library('user_agent');
+
+            $this->session->set_flashdata('success', 'Record update successfully');
+            redirect($this->agent->referrer());
+             
          }
 
 
@@ -74,6 +79,74 @@ class Admin extends CI_Controller {
 
 
     }
+
+
+    
+public function catupdate()
+{
+
+
+
+
+    $this->load->helper('url');
+    $this->load->helper('form');
+    $this->load->library('form_validation');
+    $this->form_validation->set_rules('catname', 'Category Name', 'required|max_length[12]');
+
+    if ($this->form_validation->run() == FALSE) {
+        $this->session->set_flashdata('validation', 'Record update unsuccessfully');
+        $this->session->set_flashdata('validation2', validation_errors());
+        $this->load->library('user_agent');
+
+
+        // Redirect the user to the previous page
+        redirect($this->agent->referrer());
+           
+     } else {
+    // Get the form data
+    $id = $this->input->post('id');
+    $catname = $this->input->post('catname');
+
+    // Load the User model
+    $this->load->model('catmodel');
+
+    // Update the user data
+    $this->catmodel->update_cat($id, $catname);
+
+    // Redirect back to the user list page
+    $this->session->set_flashdata('success', 'Record update successfully');
+    $this->load->library('user_agent');
+
+
+    // Redirect the user to the previous page
+    redirect($this->agent->referrer());
+
+   
+     }
+}
+public function delete($id)
+{
+    // Load the User model
+    $this->load->model('catmodel');
+    
+    // Delete the user by ID
+    $this->catmodel->delete_categories($id);
+    
+    // Redirect back to the user list page
+    $this->session->set_flashdata('success', 'Record delete  successfully');
+    $this->load->library('user_agent');
+
+
+    // Redirect the user to the previous page
+    redirect($this->agent->referrer());
+
+
+  
+}
+
+
+
+
 	public function subcategories()
 	{
 
