@@ -77,12 +77,60 @@
 <!-- main content start  -->
 
 
-hello this is sub-categories page
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Add Sub Category
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Sub_Categories</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      <?php echo form_open(base_url('admin/subCatStor')); ?> 
+
+    <div class="form-group">
+  <label for="sel1">Select list:</label>
+  <select class="form-control" id="sel1" name="catId">
+    <option> Select please</option>
+    <?php foreach($categories as $categories): ?>
+           <option value="<?php echo $categories->id;?>"><?php echo $categories->catname;?></option>
+           <?php endforeach; ?>
+  </select>
+</div>
+
+
+
+    
+     
+
+      <div class="mb-3">
+  <label for="exampleFormControlInput1" class="form-label">Sub Category</label>
+  <input type="text" name="subCat" class="form-control" id="exampleFormControlInput1" placeholder=" sub categories here..">
+</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+    <?php echo form_close(); ?>
+  </div>
+</div>
+    
 
 
 <!-- main content end  -->
 
 
+ <!-- ========sub categories show in table===========
+ -->
 
             </div>
     </div>
