@@ -44,6 +44,9 @@
                         <li class="active">
                             <a href="<?php echo base_url(); ?>admin/subcategories">Sub-Categories</a>
                         </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>admin/unit">Unit</a>
+                        </li>
                        
                     </ul>
                 </li>
