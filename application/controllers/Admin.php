@@ -26,7 +26,8 @@ class Admin extends CI_Controller {
 
 
 		$categories = $this->catmodel->get_categories();
-		$data = array('categories' => $categories);
+		$data = array('categories' => $categories,
+						'validation1'=>$this->session->flashdata('validation1'));
 		$this->load->view('admin/categories', $data);  
 
 
@@ -38,9 +39,12 @@ class Admin extends CI_Controller {
 		$this->form_validation->set_rules('catname', 'Category Name', 'required|max_length[12]|is_unique[categories.catname]');
 
         if ($this->form_validation->run() == FALSE) {
-            $categories = $this->catmodel->get_categories();
-		$data = array('categories' => $categories);
-		$this->load->view('admin/categories', $data);  
+			$this->session->set_flashdata('validation1', validation_errors());
+			$this->load->library('user_agent');
+
+
+            // Redirect the user to the previous page
+            redirect($this->agent->referrer());
 
          } else {
             // Validation passed, process the form data
