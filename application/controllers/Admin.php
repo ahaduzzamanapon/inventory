@@ -77,4 +77,10 @@ class Admin extends CI_Controller {
 
 		$this->load->view('admin/subcategories');
 	}
+
+    // Unit Part Starts Here
+    public function unit()
+    {
+        $this->load->view('admin/unit');
+    }
 }

@@ -5,21 +5,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
     <!-- local css -->
-
-    <link rel = "stylesheet" type = "text/css" 
-   href = "<?php echo base_url(); ?>css/style.css">
-
-<!-- <script type = 'text/javascript' src = "<?php echo base_url(); 
-   ?>js/sample.js"></script> -->
-
-
-
-
-
-
+    <link rel = "stylesheet" type = "text/css" href = "<?php echo base_url(); ?>css/style.css">
+    <!-- <script type = 'text/javascript' src = "<?php #echo base_url(); ?>js/sample.js"></script> -->
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
@@ -41,7 +29,7 @@
                         <li>
                             <a href="<?php echo base_url(); ?>admin/categories">Categories</a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="<?php echo base_url(); ?>admin/subcategories">Sub-Categories</a>
                         </li>
                         <li class="active">
@@ -53,37 +41,29 @@
                 <li>
                     <a href="#">About</a>
                 </li>
-            
-            </ul>
-
-           
+            </ul>  
         </nav>
-
-     
         <div id="content">
-
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
 
                     <button type="button" id="sidebarCollapse" class="btn btn-info">
                         <i class="fas fa-align-left"></i>
                         <span>Menu</span>
-                    </button>
-                   
-
-                    
+                    </button>   
                 </div>
             </nav>
-<!-- main content start  -->
-
-
-hello
-
-<!-- main content end  -->
+            <!-- main content start  -->
+            This is unit page
 
 
 
-            </div>
+           <!-- main content end  -->
+        
+        
+        
+        
+        </div>
     </div>
 
 
