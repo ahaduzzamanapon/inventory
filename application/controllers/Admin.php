@@ -95,7 +95,7 @@ public function catupdate()
     $this->form_validation->set_rules('catname', 'Category Name', 'required|max_length[12]');
 
     if ($this->form_validation->run() == FALSE) {
-        $this->session->set_flashdata('validation', 'Record update unsuccessfully');
+        $this->session->set_flashdata('validation2', 'Record update unsuccessfully');
         $this->session->set_flashdata('validation2', validation_errors());
         $this->load->library('user_agent');
 
