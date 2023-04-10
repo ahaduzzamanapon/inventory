@@ -157,8 +157,11 @@
                                 <div class="form-group">
 
                                 <label for="name">categories Name:</label>
-                                <?php echo form_error('name', '<div class="text-danger">', '</div>'); ?>
-
+                                <?php if ($this->session->flashdata('validation1')) { ?>
+                <div class="alert alert-danger">
+                    <?php echo $this->session->flashdata('validation1'); ?>
+                </div>
+            <?php } ?>
                                 <input type="text" class="form-control" id="name" name="catname">
                                 </div>
                             
@@ -230,6 +233,17 @@
 
                         
                             echo '<script>$("#editUserModal").modal("show");</script>';
+
+
+
+                        ?>
+                        <?php } ?>
+                        <?php if ($this->session->flashdata('validation1')) { ?>
+                            <?php
+
+
+                        
+                                  echo '<script>$("#myModal").modal("show");</script>';
 
 
 
