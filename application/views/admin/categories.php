@@ -17,6 +17,10 @@
 
 
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
 
@@ -97,27 +101,33 @@
                     </button>
 
 
+                    <?php
+
+                    ?>
+
+
+
+
 
                     <table class="table table-hover">
     <thead>
       <tr>
         <th>Name</th>
         
-        <th>Email</th>
         <th>Action</th>
       </tr>
     </thead>
-    <!-- <tbody>
-    <?php foreach ($users as $user): ?>
+    <tbody>
+    <?php foreach ($categories as $cat): ?>
 
 
 
         <tr>
-            <td><?php echo $user->name; ?></td>
-            <td><?php echo $user->email; ?></td>
+            <td><?php echo $cat->catname; ?></td>
+            
             <td>
-            <a href="#" class="btn btn-primary" id="editUserModalLink" data-toggle="modal" data-target="#editUserModal" data-id="<?php echo $user->id; ?>" data-name="<?php echo $user->name; ?>" data-email="<?php echo $user->email; ?>">Edit</a>
-            <a href="<?php echo base_url('usercontroller/delete/'.$user->id); ?>" 
+            <a href="#" class="btn btn-primary" id="editUserModalLink" data-toggle="modal" data-target="#editUserModal" data-id="<?php echo $cat->id; ?>" data-catname="<?php echo $cat->catname; ?>">Edit</a>
+            <a href="<?php echo base_url('admin/delete/'.$cat->id); ?>" 
    class="btn btn-danger btn-sm" 
    onclick="return confirm('Are you sure you want to delete this user?');">
    Delete
@@ -128,7 +138,7 @@
         <?php endforeach; ?>
 
    
-    </tbody> -->
+    </tbody>
   </table>
 
 
@@ -211,9 +221,9 @@
                         
                             echo '<script>$("#myModal").modal("show");</script>';
                         }
-
-
                         ?>
+
+
                         <?php if ($this->session->flashdata('validation')) { ?>
                             <?php
 

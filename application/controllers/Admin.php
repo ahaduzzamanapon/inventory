@@ -39,8 +39,8 @@ class Admin extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE) {
             $categories = $this->catmodel->get_categories();
-            $data = array('categories' => $categories);
-            $this->load->view('user', $data);  
+		$data = array('categories' => $categories);
+		$this->load->view('admin/categories', $data);  
 
          } else {
             // Validation passed, process the form data
