@@ -162,7 +162,7 @@
                     <?php echo $this->session->flashdata('validation1'); ?>
                 </div>
             <?php } ?>
-                                <input type="text" class="form-control" id="name" name="catname">
+                                <input type="text" class="form-control" id="name" name="catname" required>
                                 </div>
                             
                                 <button type="submit" class="btn btn-primary">Submit</button>
