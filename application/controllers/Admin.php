@@ -10,7 +10,7 @@ class Admin extends CI_Controller
         $this->load->database();
         $this->load->model('catmodel');
         $this->load->model('subModel');
-        $this->load->model('Unit');
+        $this->load->model('subModel');
         $this->load->library('session');
         $this->load->helper('url');
     }
@@ -80,9 +80,8 @@ class Admin extends CI_Controller
 	{
 
 
-        $categories = $this->catmodel->get_categories();
-		$data = array('categories' => $categories);
-        $this->load->view('admin/subcategories',$data);
+
+		$this->load->view('admin/subcategories');
 	}
 
 
@@ -118,11 +117,10 @@ class Admin extends CI_Controller
 
             $this->db->insert('subcategories', $data);
             $this->session->set_flashdata('success', 'Record added successfully');
-              $Subcategories = $this->subModel->get_categories();
-              $categories = $this->catmodel->get_categories();
-            $data = array('Subcategories' => $Subcategories,'categories' => $categories);
-            $this->load->view('admin/subcategories', $data); 
-           
+            // $categories = $this->catmodel->get_categories();
+            // $data = array('categories' => $categories);
+            // $this->load->view('admin/categories', $data); 
+            redirect('admin/subcategories');  
                  
          }
 
