@@ -127,11 +127,56 @@
 
 
 <!-- main content end  -->
-
-
+  
+        <?php if ($this->session->flashdata('success')) { ?>
+                    <div class="alert alert-success">
+                        <?php echo $this->session->flashdata('success'); ?>
+                    </div>
+                    <?php } ?>
  <!-- ========sub categories show in table===========
- -->
+ -->    
+               
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th> Sub Name</th>
 
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($Subcategories as $sub): ?>
+
+
+
+                    <tr>
+                        <td><?php echo $sub->catname; ?></td>
+                        <td><?php echo $sub->subcname; ?></td>
+                       
+
+                        <td>
+                            <a href="#" class="btn btn-primary" id="editUserModalLink" data-toggle="modal"
+                                data-target="#editUserModal" data-id="<?php echo $sub->sid; ?>"
+                                data-catname="<?php echo $sub->catname; ?>">Edit</a>
+                            <a href="<?php echo base_url('admin/delete/'.$sub->sid); ?>" class="btn btn-danger btn-sm"
+                                onclick="return confirm('Are you sure you want to delete this user?');">
+                                Delete
+                            </a>
+                        </td>
+
+                    </tr>
+                    <?php endforeach; ?>
+
+
+                </tbody>
+            </table>
+
+           
+
+
+
+       
             </div>
     </div>
 

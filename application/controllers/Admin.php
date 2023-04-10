@@ -153,7 +153,14 @@ public function delete($id)
 
 
         $categories = $this->catmodel->get_categories();
-		$data = array('categories' => $categories);
+        $this->db->select('subcategories.sid, categories.catname, subcategories.subcname');
+        $this->db->from('subcategories');
+        $this->db->join('categories', 'categories.id = subcategories.catname');
+        $query = $this->db->get();
+        $result = $query->result();
+           
+            
+		$data = array('Subcategories' =>  $result,'categories'=> $categories );
         $this->load->view('admin/subcategories',$data);
 	}
 
@@ -190,10 +197,11 @@ public function delete($id)
 
             $this->db->insert('subcategories', $data);
             $this->session->set_flashdata('success', 'Record added successfully');
-            // $categories = $this->catmodel->get_categories();
-            // $data = array('categories' => $categories);
-            // $this->load->view('admin/categories', $data); 
-            redirect('admin/subcategories');  
+              $Subcategories = $this->subModel->get_categories();
+              $categories = $this->catmodel->get_categories();
+            $data = array('Subcategories' => $Subcategories,'categories' => $categories);
+            $this->load->view('admin/subcategories', $data); 
+           
                  
          }
 
