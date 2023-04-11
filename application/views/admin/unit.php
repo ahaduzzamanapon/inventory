@@ -1,4 +1,4 @@
-0<!doctype html>
+<!doctype html>
 <html lang="en">
   <head>
     <title>Inventory</title>
@@ -31,7 +31,7 @@
                             <a href="<?php echo base_url(); ?>admin/subcategories">Sub-Categories</a>
                         </li>
                         <li class="active">
-                            <a href="<?php echo base_url(); ?>admin/unit">Unit</a>
+                            <a href="<?php echo base_url(); ?>unitController">Unit</a>
                         </li>
                        
                     </ul>
@@ -79,20 +79,20 @@
                 </tr>
                 </thead>
                 
-                <!-- <tbody>
-                <?#php foreach ($units as $unit): ?>
+                <tbody>
+                <?php foreach ($units as $unit): ?>
                     <tr>
                         <td>
-                            <?php #echo $unit->unitName; ?>
+                            <?php echo $unit->unitName; ?>
                         </td>
                         <td>
-                            <a href="#" class="btn btn-primary" id="editUserModalLink" data-toggle="modal" data-target="#editUserModal" data-id="<?php #echo $unit->unitId; ?>" data-unitName="<?php #echo $unit->unitName; ?>">Edit</a>
-                            <a href="<?php #echo base_url('admin/delete/'.$unit->unitId); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this unit?');"> Delete </a>
+                            <a href="#" class="btn btn-primary" id="editUserModalLink" data-toggle="modal" data-target="#editUserModal" data-id="<?php echo $unit->unitId; ?>" data-unitName="<?php echo $unit->unitName; ?>">Edit</a>
+                            <a href="<?php echo base_url('unitController/delete/'.$unit->unitId); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this unit?');"> Delete </a>
                         </td>
 
                     </tr>
-                    <?php #endforeach; ?>   
-                </tbody> -->
+                    <?php endforeach; ?>   
+                </tbody>
 
             </table>
             <!-- The Modal -->
@@ -105,7 +105,7 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                         <div class="modal-body">
-                            <?php echo form_open(base_url('admin/unitStore')); ?>                            
+                            <?php echo form_open(base_url('unitController/unitStore')); ?>                            
                             <div class="form-group">
                                 <label for="name">Units Name:</label>
                                 <?php if ($this->session->flashdata('unitValidation1')) { ?>
