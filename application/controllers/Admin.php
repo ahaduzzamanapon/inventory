@@ -10,7 +10,6 @@ class Admin extends CI_Controller
         $this->load->database();
         $this->load->model('catmodel');
         $this->load->model('subModel');
-        $this->load->model('subModel');
         $this->load->library('session');
         $this->load->helper('url');
         $this->load->library('form_validation');
@@ -61,9 +60,11 @@ class Admin extends CI_Controller
 
         $this->db->insert('categories', $data);
         $this->session->set_flashdata('success', 'Record added successfully');
-        $categories = $this->catmodel->get_categories();
-        $data = array('categories' => $categories);
-        $this->load->view('admin/categories', $data);
+        $this->load->library('user_agent');
+
+
+        // Redirect the user to the previous page
+        redirect($this->agent->referrer());
     }
 }
 
@@ -95,6 +96,12 @@ public function catupdate()
   }
 public function delete($id)
 {
+
+   $findca=$this->subModel->findcat($id);
+   
+   
+   
+   if(!$findca){
      // Load the User model
     $this->load->model('catmodel');
     // Delete the user by ID
@@ -103,7 +110,15 @@ public function delete($id)
     $this->session->set_flashdata('success', 'Record delete  successfully');
     $this->load->library('user_agent');
      // Redirect the user to the previous page
-    redirect($this->agent->referrer()); 
+    redirect($this->agent->referrer()); }else{
+        $this->session->set_flashdata('error', 'Please Delete Sub-Category First');
+        $this->load->library('user_agent');
+         // Redirect the user to the previous page
+        redirect($this->agent->referrer()); 
+
+
+
+    }
  }
 
 
@@ -243,4 +258,3 @@ public function delete_sub($sid){
 
    
 }
-

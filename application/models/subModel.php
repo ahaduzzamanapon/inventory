@@ -17,6 +17,14 @@ class subModel extends CI_Model {
         return $query->row();
 
     }
+    public function findcat($id) {
+        $this->db->where("catname", $id);
+        $query = $this->db->get('subcategories');
+        return $query->result_array();
+    }
+   
+    
+    
 
     
     public function get_catagory_by_id($id)
