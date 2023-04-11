@@ -3,8 +3,6 @@ class catmodel extends CI_Model {
 
     public function get_categories() {
         $this->load->database();
-      
-
         $query = $this->db->order_by('id', 'desc')->get('categories');
         return $query->result();
     }
