@@ -69,7 +69,28 @@ class unitController extends CI_Controller
          
 
     }
-    
+
+    public function update($id)
+    {
+        print_r($id);die;
+        $this->load->model('Unit');
+        $this->Unit->update($id);
+        $this->session->set_flashdata('success', 'Unit deleted successfully');
+        $this->load->library('user_agent');
+        // Redirect the user to the previous page
+        redirect($this->agent->referrer());
+    }
+
+    public function delete($id)
+    {
+        $this->load->model('Unit');
+        $this->Unit->deleteUnit($id);
+        $this->session->set_flashdata('success', 'Unit deleted successfully');
+        $this->load->library('user_agent');
+
+        // Redirect the user to the previous page
+        redirect($this->agent->referrer());
+    }
 	
    
 }

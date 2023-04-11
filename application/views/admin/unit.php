@@ -86,7 +86,7 @@
                             <?php echo $unit->unitName; ?>
                         </td>
                         <td>
-                            <a href="#" class="btn btn-primary" id="editUserModalLink" data-toggle="modal" data-target="#editUserModal" data-id="<?php echo $unit->unitId; ?>" data-unitName="<?php echo $unit->unitName; ?>">Edit</a>
+                            <a href="<?php echo base_url('unitController/update/'.$unit->unitId); ?>" class="btn btn-primary" id="editUserModalLink" data-toggle="modal" data-target="#editUserModal" data-id="<?php echo $unit->unitId; ?>" data-unitName="<?php echo $unit->unitName; ?>">Edit</a>
                             <a href="<?php echo base_url('unitController/delete/'.$unit->unitId); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this unit?');"> Delete </a>
                         </td>
 
@@ -140,7 +140,7 @@
 
                                 <!-- Edit Unit Form -->
                                 
-                                <?php echo form_open('<?php echo base_url(); ?>/admin/catupdate', 'class="form-horizontal"'); ?>
+                                <?php echo form_open('<?php echo base_url(); ?>/unitController/update', 'class="form-horizontal"'); ?>
                                 <input type="hidden" id="id" name="id" value="" />
                                 <div class="form-group">
                                     <label for="name">Units Name</label>

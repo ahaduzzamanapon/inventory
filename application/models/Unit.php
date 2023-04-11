@@ -35,10 +35,9 @@ class Unit extends CI_Model {
     //     $this->db->where('id', $id);
     //     $this->db->delete('categories');
     // }
-    public function delete_units($id)
+    public function deleteUnit($id)
     {
-        $this->db->where('id', $id);
-        $this->db->delete('units');
+        return $this->db->delete('units', ['unitId' => $id]);
     }
 
 }
