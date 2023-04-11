@@ -23,7 +23,7 @@ class unitController extends CI_Controller
 	// }
 	public function index()
 	{
-		$units = $this->Unit->get_units();
+		$units = $this->Unit->showAllData();
 		$data = array('units' => $units,
 						'unitValidation1'=>$this->session->flashdata('unitValidation1'));
 		$this->load->view('admin/unit', $data);  
@@ -55,7 +55,7 @@ class unitController extends CI_Controller
 
             $this->db->insert('units', $data);
             $this->session->set_flashdata('success', 'Unit added successfully');
-            $units = $this->Unit->get_units();
+            $units = $this->Unit->showAllData();
             $data = array('units' => $units);
          
             // // echo "<pre>";
@@ -70,15 +70,47 @@ class unitController extends CI_Controller
 
     }
 
-    public function update($id)
+    public function update()
     {
-        print_r($id);die;
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('unitName', 'Unit Name', 'required|max_length[12]');
+    
+        if ($this->form_validation->run() == FALSE) 
+        {
+            $this->session->set_flashdata('validation2', 'Unit update unsuccessfully');
+            $this->session->set_flashdata('validation2', validation_errors());
+            $this->load->library('user_agent');
+    
+    
+            // Redirect the user to the previous page
+            redirect($this->agent->referrer());
+               
+         } else {
+        // Get the form data
+        // print_r($_POST);die;
+        $unitId = $this->input->post('id');
+        $unitName = $this->input->post('unitName');
+        // print_r($unitId);die;
+
+    
+        // Load the User model
         $this->load->model('Unit');
-        $this->Unit->update($id);
-        $this->session->set_flashdata('success', 'Unit deleted successfully');
+    
+        // Update the user data
+        $this->Unit->updateUnit($unitId, $unitName);
+    
+        // Redirect back to the user list page
+        $this->session->set_flashdata('success', 'Unit update successfully');
         $this->load->library('user_agent');
+    
+    
         // Redirect the user to the previous page
         redirect($this->agent->referrer());
+    
+       
+         }
     }
 
     public function delete($id)

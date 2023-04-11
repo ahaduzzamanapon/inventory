@@ -1,7 +1,7 @@
 <?php
 class Unit extends CI_Model {
 
-    public function get_units() {
+    public function showAllData() {
         $this->load->database();
       
 
@@ -35,6 +35,17 @@ class Unit extends CI_Model {
     //     $this->db->where('id', $id);
     //     $this->db->delete('categories');
     // }
+    
+    function updateUnit($unitId, $unitName)
+    {
+        $data = array(
+            'unitName' => $unitName,
+        );
+        $this->db->where('unitId', $unitId);
+        // print_r($result);die;
+        $this->db->update('units', $data);
+    }
+    
     public function deleteUnit($id)
     {
         return $this->db->delete('units', ['unitId' => $id]);

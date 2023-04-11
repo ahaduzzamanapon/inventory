@@ -13,9 +13,16 @@ class Admin extends CI_Controller
         $this->load->model('Unit');
         $this->load->library('session');
         $this->load->helper('url');
+        $this->load->library('form_validation');
+        $this->load->library('user_agent');
     }
 
-
+    // public function test($any)
+    // {
+    //     //var_dump($any);
+    //     var_dump(explode('/',current_url())[array_key_last(explode('/',current_url()))]);
+    //     //var_dump($_REQUEST);
+    // }
 	
 	public function index()
 	{
@@ -39,11 +46,11 @@ class Admin extends CI_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('catname', 'Category Name', 'required|max_length[12]|is_unique[categories.catname]');
+		$this->form_validation->set_rules('catname', 'Category Name', 'required|max_length[12]|is_unique[categories.catname]');
 
-        if ($this->form_validation->run() == false) {
-            $this->session->set_flashdata('validation1', validation_errors());
-            $this->load->library('user_agent');
+        if ($this->form_validation->run() == FALSE) {
+			$this->session->set_flashdata('validation1', validation_errors());
+			$this->load->library('user_agent');
 
 
             // Redirect the user to the previous page
@@ -56,14 +63,16 @@ class Admin extends CI_Controller
             $data = array(
                 'catname' => $catname,
                  );
-
-            $this->load->database();
+				
+				 $this->load->database();
 
             $this->db->insert('categories', $data);
-            $this->session->set_flashdata('success', 'Record added successfully');
-            $categories = $this->catmodel->get_categories();
-            $data = array('categories' => $categories);
-            $this->load->view('admin/categories', $data);        
+
+            $this->load->library('user_agent');
+
+            $this->session->set_flashdata('success', 'Record update successfully');
+            redirect($this->agent->referrer());
+             
          }
 
 
@@ -76,6 +85,74 @@ class Admin extends CI_Controller
 
 
     }
+
+
+    
+public function catupdate()
+{
+
+
+
+
+    $this->load->helper('url');
+    $this->load->helper('form');
+    $this->load->library('form_validation');
+    $this->form_validation->set_rules('catname', 'Category Name', 'required|max_length[12]');
+
+    if ($this->form_validation->run() == FALSE) {
+        $this->session->set_flashdata('validation2', 'Record update unsuccessfully');
+        $this->session->set_flashdata('validation2', validation_errors());
+        $this->load->library('user_agent');
+
+
+        // Redirect the user to the previous page
+        redirect($this->agent->referrer());
+           
+     } else {
+    // Get the form data
+    $id = $this->input->post('id');
+    $catname = $this->input->post('catname');
+
+    // Load the User model
+    $this->load->model('catmodel');
+
+    // Update the user data
+    $this->catmodel->update_cat($id, $catname);
+
+    // Redirect back to the user list page
+    $this->session->set_flashdata('success', 'Record update successfully');
+    $this->load->library('user_agent');
+
+
+    // Redirect the user to the previous page
+    redirect($this->agent->referrer());
+
+   
+     }
+}
+public function delete($id)
+{
+    // Load the User model
+    $this->load->model('catmodel');
+    
+    // Delete the user by ID
+    $this->catmodel->delete_categories($id);
+    
+    // Redirect back to the user list page
+    $this->session->set_flashdata('success', 'Record delete  successfully');
+    $this->load->library('user_agent');
+
+
+    // Redirect the user to the previous page
+    redirect($this->agent->referrer());
+
+
+  
+}
+
+
+
+
 	public function subcategories()
 	{
 
