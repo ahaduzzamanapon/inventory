@@ -31,7 +31,7 @@
                             <a href="<?php echo base_url(); ?>admin/subcategories">Sub-Categories</a>
                         </li>
                         <li class="active">
-                            <a href="<?php echo base_url(); ?>admin/unit">Unit</a>
+                            <a href="<?php echo base_url(); ?>unitController">Unit</a>
                         </li>
                        
                     </ul>
@@ -68,7 +68,7 @@
             <?php } ?>
                     <!-- Button to Open the Modal -->
                     <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#myModal">
-                    Add Units
+                    Add Unit
                     </button>
                     <?php ?>
             <table class="table table-hover">
@@ -79,20 +79,20 @@
                 </tr>
                 </thead>
                 
-                <!-- <tbody>
-                <?#php foreach ($units as $unit): ?>
+                <tbody>
+                <?php foreach ($units as $unit): ?>
                     <tr>
                         <td>
-                            <?php #echo $unit->unitName; ?>
+                            <?php echo $unit->unitName; ?>
                         </td>
                         <td>
-                            <a href="#" class="btn btn-primary" id="editUserModalLink" data-toggle="modal" data-target="#editUserModal" data-id="<?php #echo $unit->unitId; ?>" data-unitName="<?php #echo $unit->unitName; ?>">Edit</a>
-                            <a href="<?php #echo base_url('admin/delete/'.$unit->unitId); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this unit?');"> Delete </a>
+                            <a href="<?php echo base_url('unitController/update/'.$unit->unitId); ?>" class="btn btn-primary" id="editUserModalLink" data-toggle="modal" data-target="#editUserModal" data-id="<?php echo $unit->unitId; ?>" data-unitName="<?php echo $unit->unitName; ?>">Edit</a>
+                            <a href="<?php echo base_url('unitController/delete/'.$unit->unitId); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this unit?');"> Delete </a>
                         </td>
 
                     </tr>
-                    <?php #endforeach; ?>   
-                </tbody> -->
+                    <?php endforeach; ?>   
+                </tbody>
 
             </table>
             <!-- The Modal -->
@@ -105,9 +105,9 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                         <div class="modal-body">
-                            <?php echo form_open(base_url('admin/unitStore')); ?>                            
+                            <?php echo form_open(base_url('unitController/update')); ?>                            
                             <div class="form-group">
-                                <label for="name">Units Name:</label>
+                                <label for="name">Unit Name</label>
                                 <?php if ($this->session->flashdata('unitValidation1')) { ?>
                                 <div class="alert alert-danger">
                                     <?php echo $this->session->flashdata('unitValidation1'); ?>
@@ -127,69 +127,59 @@
 
 
                         <!-- Edit Unit Modal -->
-                        <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
+                        <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog"
+                    aria-labelledby="editUserModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="editUserModalLabel">Edit Unit</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+                                    <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
                             <div class="modal-body">
-
-                                <!-- Edit Unit Form -->
-                                
-                                <?php echo form_open('<?php echo base_url(); ?>/admin/catupdate', 'class="form-horizontal"'); ?>
-                                <input type="hidden" id="id" name="id" value="" />
+                                <?php echo form_open(base_url('unitController/update')); ?>
+                                <input type="hidden" id="id" name="id" value="<?php echo $unit->unitId ?>" />
                                 <div class="form-group">
-                                    <label for="name">Units Name</label>
-                                    <?php echo form_error('name', '<div class="text-danger">', '</div>'); ?>
-
-                                    <input type="text" class="form-control" id="name" name="name" value="" required>
+                                    <label for="name">Unit Name</label>
+                                    <?php if ($this->session->flashdata('validation2')) {?>
+                                    <div class="alert alert-danger">
+                                        <?php echo $this->session->flashdata('validation2'); ?>
+                                    </div>
+                                    <?php }?>
+                                    <input type="text" class="form-control" id="name" name="unitName" value="<?php echo $unit->unitName ?>" required>
                                 </div>
-                   
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                    <button type="submit" class="btn btn-primary">Save Changes</button>
                                 </div>
                                 <?php echo form_close(); ?>
-                                
-                                <!-- End of Edit User Form -->
-                            
-                            
-                            </div>
+                                <!-- End of Edit cat Form -->
                             </div>
                         </div>
-                        </div>
-                        <?php
-                            if(validation_errors()) 
-                            {
-                                echo '<script>$("#myModal").modal("show");</script>';
-                            }
-                            if ($this->session->flashdata('validation')) 
-                            {
-                                echo '<script>$("#editUserModal").modal("show");</script>';
-                            } 
-                            if ($this->session->flashdata('unitValidation1')) 
-                            {
-                                echo '<script>$("#myModal").modal("show");</script>'; 
-                            } 
-                        ?>
+                    </div>
+                </div>
 
-                        <!-- jQuery code for setting the input field values in the modal -->
-                        
-                        <script>
-                        $(document).on("click", "#editUserModalLink", function () 
-                        {
-                            var id = $(this).data("unitId");
-                            var name = $(this).data("unitName");
-                            
-                            $("#editUserModal #id").val(unitId);
-                            $("#editUserModal #name").val(unitName);
-                        
-                        });
-                        </script>
+                <!-- code for show modal -->
+                <?php if ($this->session->flashdata('validation2')) {?>
+                <?php echo '<script>$("#editUserModal").modal("show");</script>'; ?>
+                <?php }?>
+
+                <?php if ($this->session->flashdata('unitValidation1')) {?>
+                <?php echo '<script>$("#myModal").modal("show");</script>'; ?>
+                <?php }?>
+                <!-- code for show modal -->
+
+                <!-- jQuery code for setting the input field values in the modal -->
+                <script>
+                $(document).on("click", "#editUserModalLink", function() {
+                    var id = $(this).data("id");
+                    var name = $(this).data("unitName");
+
+                    $("#editUserModal #id").val(id);
+                    $("#editUserModal #name").val(name);
+                });
+                </script>
             
 
            <!-- main content end  -->
