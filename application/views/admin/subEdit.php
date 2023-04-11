@@ -89,7 +89,7 @@
                 </select>
                
                  
-                <input type="text" class="form-control mt-2" value="<?php echo ($item->subcname);?>" name="subname">
+                <input type="text" class="form-control mt-2" value="<?php echo ($item->subcname);?>" name="subname" required>
                  
                 <input type="hidden" class="form-control mt-2" value="<?php echo ($item->sid);?>" name="subId">
                 <input type="submit" class="form-control mt-2 btn btn-sm btn-primary" name="Submit">
