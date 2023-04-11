@@ -84,12 +84,7 @@
 
             <table class="table table-hover">
                 <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Action</th>
-                    </tr>
-
-                    <thead>
+                    
                         <tr>
                             <th>Category Name</th>
                             <th>Actions</th>
