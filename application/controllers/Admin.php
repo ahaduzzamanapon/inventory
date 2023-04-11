@@ -11,9 +11,16 @@ class Admin extends CI_Controller {
         $this->load->model('subModel');
         $this->load->library('session');
         $this->load->helper('url');
+        $this->load->library('form_validation');
+        $this->load->library('user_agent');
     }
 
-
+    // public function test($any)
+    // {
+    //     //var_dump($any);
+    //     var_dump(explode('/',current_url())[array_key_last(explode('/',current_url()))]);
+    //     //var_dump($_REQUEST);
+    // }
 	
 	public function index()
 	{
@@ -37,14 +44,12 @@ class Admin extends CI_Controller {
 
 	}
 	public function catstor() {
-        $this->load->helper('url');
-        $this->load->helper('form');
-        $this->load->library('form_validation');
+        
 		$this->form_validation->set_rules('catname', 'Category Name', 'required|max_length[12]|is_unique[categories.catname]');
 
         if ($this->form_validation->run() == FALSE) {
 			$this->session->set_flashdata('validation1', validation_errors());
-			$this->load->library('user_agent');
+			
 
 
             // Redirect the user to the previous page
@@ -59,11 +64,11 @@ class Admin extends CI_Controller {
                 'catname' => $catname,
                  );
 				
-				 $this->load->database();
+				
 
             $this->db->insert('categories', $data);
 
-            $this->load->library('user_agent');
+            
 
             $this->session->set_flashdata('success', 'Record update successfully');
             redirect($this->agent->referrer());
@@ -86,18 +91,11 @@ class Admin extends CI_Controller {
 public function catupdate()
 {
 
-
-
-
-    $this->load->helper('url');
-    $this->load->helper('form');
-    $this->load->library('form_validation');
     $this->form_validation->set_rules('catname', 'Category Name', 'required|max_length[12]');
 
     if ($this->form_validation->run() == FALSE) {
         $this->session->set_flashdata('validation2', 'Record update unsuccessfully');
         $this->session->set_flashdata('validation2', validation_errors());
-        $this->load->library('user_agent');
 
 
         // Redirect the user to the previous page
