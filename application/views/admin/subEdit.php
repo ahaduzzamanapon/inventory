@@ -73,103 +73,29 @@
 
                     
                 </div>
-            </nav>
-<!-- main content start  -->
+                            </nav>
+                <!-- main content start  -->
+                <?php echo form_open(base_url('admin/upDated')); ?>
 
+                 
+                <div class="form-group">
+                <label for="sel1">Select list:</label>
+                <select class="form-control" id="sel1" name="catId">
+                    <option class=" bg-info text-white" value="<?php echo $catName->id;?>" disabled><?php echo $catName->catname;?></option>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Add Sub Category
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add Sub_Categories</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      <?php echo form_open(base_url('admin/subCatStor')); ?> 
-
-    <div class="form-group">
-  <label for="sel1">Select list:</label>
-  <select class="form-control" id="sel1" name="catId">
-    <option> Select please</option>
-    <?php foreach($categories as $categories): ?>
-           <option value="<?php echo $categories->id;?>"><?php echo $categories->catname;?></option>
-           <?php endforeach; ?>
-  </select>
-</div>
-
-
-
-    
-     
-
-      <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Sub Category</label>
-  <input type="text" name="subCat" class="form-control" id="exampleFormControlInput1" placeholder=" sub categories here..">
-</div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save</button>
-      </div>
-    </div>
-    <?php echo form_close(); ?>
-  </div>
-</div>
-    
-
-
-<!-- main content end  -->
-  
-        <?php if ($this->session->flashdata('success')) { ?>
-                    <div class="alert alert-success">
-                        <?php echo $this->session->flashdata('success'); ?>
-                    </div>
-                    <?php } ?>
- <!-- ========sub categories show in table===========
- -->    
+                    <?php foreach($categories as $categories): ?>
+                        <option value="<?php echo $categories->id;?>"><?php echo $categories->catname;?></option>
+                        <?php endforeach; ?>
+                </select>
                
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Category</th>
-                        <th> Sub Name</th>
-
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($Subcategories as $sub): ?>
+                 
+                <input type="text" class="form-control mt-2" value="<?php echo ($item->subcname);?>" name="subname">
+                 
+                <input type="hidden" class="form-control mt-2" value="<?php echo ($item->sid);?>" name="subId">
+                <input type="submit" class="form-control mt-2 btn btn-sm btn-primary" name="Submit">
 
 
-
-                    <tr>
-                        <td><?php echo $sub->catname; ?></td>
-                        <td><?php echo $sub->subcname; ?></td>
-                       
-
-                        <td>
-                        <a href="<?php echo base_url('admin/edit/'.$sub->sid); ?>" class="btn btn-primary btn-sm">Edit</a>
-                          <a href="<?php echo base_url('admin/delete_sub/'.$sub->sid); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
-
-                        </td>
-
-                    </tr>
-                    <?php endforeach; ?>
-
-
-                </tbody>
-            </table>
-
-           
-
+                <?php echo form_close(); ?>
 
 
        

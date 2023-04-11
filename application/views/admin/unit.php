@@ -147,7 +147,7 @@
                                         <?php echo $this->session->flashdata('validation2'); ?>
                                     </div>
                                     <?php }?>
-                                    <input type="text" class="form-control" id="name" name="unitName" value="" required>
+                                    <input type="text" class="form-control" id="name" name="unitName" value="<?php echo $unit->unitName ?>" required>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

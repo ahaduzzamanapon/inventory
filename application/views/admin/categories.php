@@ -42,7 +42,7 @@
                             <a href="<?php echo base_url(); ?>admin/subcategories">Sub-Categories</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>admin/unit">Unit</a>
+                            <a href="<?php echo base_url(); ?>unitController">Unit</a>
                         </li>
                     </ul>
                 </li>
