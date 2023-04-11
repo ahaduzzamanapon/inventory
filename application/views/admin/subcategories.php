@@ -157,7 +157,7 @@
 
                         <td>
                         <a href="<?php echo base_url('admin/edit/'.$sub->sid); ?>" class="btn btn-primary btn-sm">Edit</a>
-                          <a href="<?php echo base_url('admin/delete_sub/'.$sub->sid); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                          <a href="<?php echo base_url('admin/delete_sub/'.$sub->sid); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Sub catagory?');">Delete</a>
 
                         </td>
 
