@@ -76,6 +76,8 @@
                         <span>Menu</span>
                     </button>
 
+                    <a href="<?php echo site_url('Logout');?>" class="btn btn-success btn-sm btn-inline" style="color:#fff;">Logout</a>
+
 
 
                 </div>
