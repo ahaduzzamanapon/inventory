@@ -15,7 +15,8 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
@@ -35,7 +36,7 @@
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
                         class="dropdown-toggle">Setup</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li class="active">
+                        <li >
                             <a href="<?php echo base_url(); ?>admin/categories">Categories</a>
                         </li>
                         <li>
@@ -44,7 +45,7 @@
                         <li>
                             <a href="<?php echo base_url(); ?>unitController">Unit</a>
                         </li>
-                        <li>
+                        <li class="active">
                             <a href="<?php echo base_url(); ?>itemcontroller">Item</a>
                         </li>
                     </ul>
@@ -73,89 +74,145 @@
                 <?php echo $this->session->flashdata('success'); ?>
             </div>
             <?php }?>
-           
 
-          
-
-
-            <?php if ($this->session->flashdata('error')) {?>
+             <?php if ($this->session->flashdata('error')) {?>
             <div class="alert alert-danger">
                 <?php echo $this->session->flashdata('error'); ?>
             </div>
             <?php }?>
+                        <!-- Code for flash message end -->
 
-            <?php if ($this->session->flashdata('data')) {?>
-            <div class="alert alert-success">
-                <?php $sid=$this->session->flashdata('data'); ?>
-                <?php echo form_open(base_url('admin/forcedlt')); ?>
-  <input type="hidden" name="sid[]" value="<?php echo implode(",", $sid); ?>">
-  <p>Do you want delete these subcategory click force to delete </p>
-  <button   onclick="return confirm('Are you sure you want to delete these Subcategory?')" class="btn btn-danger" type="submit">Force to delete</button>
-  <?php echo form_close(); ?>
 
-</form>
-
-            </div>
-            <?php }?>
+          
 
             <!-- Button to open the Modal -->
             <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#myModal">
-                Add Categories
-            </button>
+                            Add Item
+                        </button>
 
             <table class="table table-hover">
                 <thead>
                     
                         <tr>
-                            <th>Category Name</th>
-                            <th>Actions</th>
+                            <th>SL</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Sub-Category</th>
+                            <th>Status</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                 <tbody>
-                    <?php foreach ($categories as $cat): ?>
+                    <?php foreach ($items as $item): ?>
                     <tr>
-                        <td><?php echo $cat->catname; ?></td>
-                        <td>
-                            <a href="#" class="btn btn-primary" id="editUserModalLink" data-toggle="modal"
-                                data-target="#editUserModal" data-id="<?php echo $cat->id; ?>"
-                                data-catname="<?php echo $cat->catname; ?>">Edit</a>
-                            <a href="<?php echo base_url('admin/delete/' . $cat->id); ?>" class="btn btn-danger btn-sm"
-                                onclick="return confirm('Are you sure you want to delete this user?');">
-                                Delete
-                            </a>
-                        </td>
+                        <td><?php echo $item->catname; ?></td>
+                       
                     </tr>
                     <?php endforeach;?>
                 </tbody>
 
-                <!-- Category Store Modal -->
-                <div class="modal fade" id="myModal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title">Add Categories</h4>
+
+<!-- start modal to stor item  -->
+
+                       
+
+                        <!-- The Modal -->
+                        <div class="modal fade" id="myModal">
+                            <div class="modal-dialog modal-xl">
+                            <div class="modal-content">
+                            
+                                <!-- Modal Header -->
+                                <div class="modal-header">
+                                <h4 class="modal-title">Add Item</h4>
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <?php echo form_open(base_url('admin/catstor')); ?>
+                                </div>
+                                
+                                <!-- Modal body -->
+                                <div class="modal-body">
+
+
+                               <?php echo form_open_multipart(base_url('itemcontroller/store_item')); ?>
                                 <div class="form-group">
-                                    <label for="name">Category Name:</label>
-                                    <?php if ($this->session->flashdata('validation1')) {?>
-                                    <div class="alert alert-danger">
-                                        <?php echo $this->session->flashdata('validation1'); ?>
-                                    </div>
-                                    <?php }?>
-                                    <input type="text" class="form-control" id="name" name="catname" required>
+                                    <label for="name">Item Name:</label>
+                                    <input type="text" class="form-control" id="name" name="itemname" value="<?php echo set_value('itemname'); ?>" required>
+                                    <?php echo form_error('itemname'); ?>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Select Category</label>
+                                    <select class="form-control" name="category" required >
+                                        <?php foreach($categories as $category) { ?>
+                                            <option value="<?php echo $category->id; ?>"><?php echo $category->catname; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <?php echo form_error('category'); ?>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Select Sub-Category</label>
+                                    <select class="form-control" name="subcategory" required>
+                                    </select>     
+                                    <?php echo form_error('subcategory'); ?>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Select Unit</label>
+                                    <select class="form-control" name="unit" required >
+                                        <?php foreach($units as $unit) { ?>
+                                            <option value="<?php echo $unit->unitId ; ?>"><?php echo $unit->unitName; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <?php echo form_error('unit'); ?>
+                                </div>
+                                <div class="form-group">
+                                    <label for="image">Item Image:</label>
+                                    <input name="image" type="file" class="form-control-file border">
+                                    <?php echo form_error('image'); ?>
+                                </div>
+                                <div class="form-group">
+                                    <label for="price">Item Price:</label>
+                                    <input type="number" class="form-control" id="price" name="price" value="<?php echo set_value('price'); ?>" required>
+                                    <?php echo form_error('price'); ?>
+                                </div>
+                                <div class="form-group">
+                                    <label for="quantity">Item quantity:</label>
+                                    <input type="number" class="form-control" id="quantity" name="quantity" value="<?php echo set_value('quantity'); ?>" required>
+                                    <?php echo form_error('quantity'); ?>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Status</label>
+                                    <select class="form-control" name="status" required >
+                                        <option value="1">Active</option>
+                                        <option value="0">In_Active</option>
+                                    </select>
+                                    <?php echo form_error('status'); ?>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <?php echo form_close(); ?>
+                            <?php echo form_close(); ?>
+
+
+
+
+                                </div>
+                                
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                                
+                            </div>
                             </div>
                         </div>
-                    </div>
-                </div>
 
-                <!-- Edit Category Modal -->
-                <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog"
+
+<!-- end modal to stor item  -->
+
+
+
+
+
+
+              
+              <!-- Edit Category Modal -->
+                <!-- <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog"
                     aria-labelledby="editUserModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -182,11 +239,11 @@
                                     <button type="submit" class="btn btn-primary">Save Changes</button>
                                 </div>
                                 <?php echo form_close(); ?>
-                                <!-- End of Edit cat Form -->
+                              
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
                 <!-- code for show modal -->
                 <?php if ($this->session->flashdata('validation2')) {?>
@@ -229,6 +286,29 @@
         });
     });
     </script>
+
+
+<!-- get categories and subcategories -->
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+  var categoryDropdown = document.querySelector('select[name="category"]');
+  categoryDropdown.addEventListener('change', function() {
+    var categoryId = this.value;
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var subcategoryDropdown = document.querySelector('select[name="subcategory"]');
+        subcategoryDropdown.innerHTML = xhr.responseText;
+      }
+    };
+    xhr.open('POST', '<?php echo base_url("itemcontroller/get_subcategories"); ?>');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send('category_id=' + categoryId);
+  });
+});
+
+</script>
+
 </body>
 
 </html>

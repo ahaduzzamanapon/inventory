@@ -8,8 +8,8 @@ class unitController extends CI_Controller
         parent::__construct();
         $this->load->helper('form');
         $this->load->database();
-        // $this->load->model('catmodel');
-        // $this->load->model('subModel');
+        $this->load->model('catmodel');
+        $this->load->model('subModel');
         $this->load->model('Unit');
         $this->load->library('session');
         $this->load->helper('url');
@@ -126,4 +126,3 @@ class unitController extends CI_Controller
 	
    
 }
-
