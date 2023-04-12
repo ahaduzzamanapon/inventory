@@ -105,7 +105,7 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                             </div>
                         <div class="modal-body">
-                            <?php echo form_open(base_url('unitController/unitStore')); ?>                            
+                            <?php echo form_open(base_url('unitController/unitStore ')); ?>                            
                             <div class="form-group">
                                 <label for="name">Unit Name</label>
                                 <?php if ($this->session->flashdata('unitValidation1')) { ?>
