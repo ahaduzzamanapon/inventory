@@ -72,6 +72,8 @@
                         <i class="fas fa-align-left"></i>
                         <span>Menu</span>
                     </button>
+                    <a href="<?php echo site_url('Logout');?>" class="btn btn-success btn-sm btn-inline" style="color:#fff;">Logout</a>
+
                    
 
                     
@@ -92,12 +94,10 @@
             <div class="form-group"style="font-size:40px; color:#000;" align="center">
               I am Mr  <?php echo $firstname?> 
             </div>
-                    
-            <div class="form-group">
-            <a href="<?php echo site_url('Logout');?>" class="btn btn-success btn-sm btn-inline" style="color:#fff;">Logout</a>
-            </div>
+      
             </form>
-        </div>
+           </div>
+
 
 
 
