@@ -37,6 +37,9 @@
                         <li class="active">
                             <a href="<?php echo base_url(); ?>unitController">Unit</a>
                         </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>itemcontroller">Unit</a>
+                        </li>
 
                     </ul>
                 </li>
