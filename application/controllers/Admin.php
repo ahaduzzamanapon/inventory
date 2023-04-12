@@ -31,7 +31,9 @@ class Admin extends CI_Controller
 	{
         $categories = $this->catmodel->get_categories();
 		$data = array('categories' => $categories,
-					  'validation1'=>$this->session->flashdata('validation1'));
+					  'validation1'=>$this->session->flashdata('validation1'),
+					  'data'=>$this->session->flashdata('data'),
+                    );
 		$this->load->view('admin/categories', $data);  
 	}
 	public function catstor() {
@@ -98,6 +100,12 @@ public function delete($id)
 {
 
    $findca=$this->subModel->findcat($id);
+   $findcadata=$this->subModel->findcatdata($id);
+   $sids = array_map(function ($object) {
+    return $object->sid;
+}, $findcadata);
+
+
    
    
    
@@ -112,6 +120,7 @@ public function delete($id)
      // Redirect the user to the previous page
     redirect($this->agent->referrer()); }else{
         $this->session->set_flashdata('error', 'Please Delete Sub-Category First');
+        $this->session->set_flashdata('data', $sids);
         $this->load->library('user_agent');
          // Redirect the user to the previous page
         redirect($this->agent->referrer()); 
@@ -120,6 +129,32 @@ public function delete($id)
 
     }
  }
+
+
+
+
+  public function forcedlt()
+{
+  $sid = $this->input->post('sid');
+ 
+  $data = $sid[0];
+  $sids = explode(",", $data);
+  
+  foreach ($sids as $value) {
+    $this->load->model('subModel');
+    $deleted= $this->subModel->delete_sub($value);
+  }
+ 
+
+  $this->session->set_flashdata('success', 'Subcategory successfully deleted');
+  $this->load->library('user_agent');
+   // Redirect the user to the previous page
+  redirect($this->agent->referrer());
+  
+
+}
+
+  
 
 
 

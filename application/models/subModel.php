@@ -22,6 +22,11 @@ class subModel extends CI_Model {
         $query = $this->db->get('subcategories');
         return $query->result_array();
     }
+    public function findcatdata($id) {
+        $this->db->where("catname", $id);
+        $query = $this->db->get('subcategories');
+        return $query->result();
+    }
    
     
     
