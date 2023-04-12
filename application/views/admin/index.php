@@ -77,7 +77,7 @@
 <!-- main content start  -->
 
 
-hello
+<?php echo $firstname?> 
 
 <!-- main content end  -->
 
