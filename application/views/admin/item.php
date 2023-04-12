@@ -140,58 +140,62 @@
                                 <div class="modal-body">
 
 
-                                <?php echo form_open(base_url('admin/catstor')); ?>
+                               <?php echo form_open_multipart(base_url('itemcontroller/store_item')); ?>
                                 <div class="form-group">
                                     <label for="name">Item Name:</label>
-                                    <!-- <?php if ($this->session->flashdata('validation1')) {?>
-                                    <div class="alert alert-danger">
-                                        <?php echo $this->session->flashdata('validation1'); ?>
-                                    </div>
-                                    <?php }?> -->
-                                    <input type="text" class="form-control" id="name" name="itemname" required>
+                                    <input type="text" class="form-control" id="name" name="itemname" value="<?php echo set_value('itemname'); ?>" required>
+                                    <?php echo form_error('itemname'); ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Select Category</label>
-                                     <select class="form-control"   name="category" >
-                                    <?php foreach($categories as $category) { ?>
-                                        <option value="<?php echo $category->id; ?>"><?php echo $category->catname; ?></option>
-                                    <?php } ?>
-                                </select>
+                                    <select class="form-control" name="category" required >
+                                        <?php foreach($categories as $category) { ?>
+                                            <option value="<?php echo $category->id; ?>"><?php echo $category->catname; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <?php echo form_error('category'); ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Select Sub-Category</label>
-                                    <select class="form-control"  name="subcategory">
+                                    <select class="form-control" name="subcategory" required>
                                     </select>     
+                                    <?php echo form_error('subcategory'); ?>
                                 </div>
-
                                 <div class="form-group">
                                     <label for="name">Select Unit</label>
-                                     <select class="form-control"   name="unit" >
-                                    <?php foreach($categories as $category) { ?>
-                                        <option value="<?php echo $category->id; ?>"><?php echo $category->catname; ?></option>
-                                    <?php } ?>
-                                </select>
+                                    <select class="form-control" name="unit" required >
+                                        <?php foreach($units as $unit) { ?>
+                                            <option value="<?php echo $unit->unitId ; ?>"><?php echo $unit->unitName; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <?php echo form_error('unit'); ?>
                                 </div>
-
-
                                 <div class="form-group">
-                                    <label for="name">Item Image:</label>
-
-                                    <input type="file" class="form-control-file border">
-
-                                      </div>
-
-
-
-
-
-
-
-
-
+                                    <label for="image">Item Image:</label>
+                                    <input name="image" type="file" class="form-control-file border">
+                                    <?php echo form_error('image'); ?>
+                                </div>
+                                <div class="form-group">
+                                    <label for="price">Item Price:</label>
+                                    <input type="number" class="form-control" id="price" name="price" value="<?php echo set_value('price'); ?>" required>
+                                    <?php echo form_error('price'); ?>
+                                </div>
+                                <div class="form-group">
+                                    <label for="quantity">Item quantity:</label>
+                                    <input type="number" class="form-control" id="quantity" name="quantity" value="<?php echo set_value('quantity'); ?>" required>
+                                    <?php echo form_error('quantity'); ?>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Status</label>
+                                    <select class="form-control" name="status" required >
+                                        <option value="1">Active</option>
+                                        <option value="0">In_Active</option>
+                                    </select>
+                                    <?php echo form_error('status'); ?>
+                                </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
-                                <?php echo form_close(); ?>
-                                
+                            <?php echo form_close(); ?>
+
 
 
 
