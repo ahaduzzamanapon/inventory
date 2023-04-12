@@ -104,9 +104,28 @@
                         </tr>
                     </thead>
                 <tbody>
-                    <?php foreach ($items as $item): ?>
+                    <?php foreach ($items as $key => $item): ?>
                     <tr>
-                        <td><?php echo $item->catname; ?></td>
+                        <td><?php echo $key ?></td>
+                        <td>
+
+                        <img src="<?php echo base_url('upload/' . $item->image); ?>" alt="My Image" height="40px" width="50px">
+                    
+                    
+                    
+                    </td>
+                        <td><?php echo $item->itemname ?></td>
+                        <td><?php echo $item->catname ?></td>
+                        <td><?php echo $item->subcname ?></td>
+                        <td><?php echo $item->status ?></td>
+                        
+                        <td>
+                            <a class="btn btn-sm btn-success" href="<?php echo base_url('itemcontroller/edit/'. $item->id);?>" >
+                                edit
+                            </a>
+                            
+                    </td>
+                        
                        
                     </tr>
                     <?php endforeach;?>
@@ -203,49 +222,10 @@
                         </div>
 
 
-<!-- end modal to stor item  -->
+<!-- end stor -->
 
 
-
-
-
-
-              
-              <!-- Edit Category Modal -->
-                <!-- <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog"
-                    aria-labelledby="editUserModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editUserModalLabel">Edit Category</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <?php echo form_open(base_url('admin/catupdate')); ?>
-                                <input type="hidden" id="id" name="id" value="" />
-                                <div class="form-group">
-                                    <label for="name">Category Name:</label>
-                                    <?php if ($this->session->flashdata('validation2')) {?>
-                                    <div class="alert alert-danger">
-                                        <?php echo $this->session->flashdata('validation2'); ?>
-                                    </div>
-                                    <?php }?>
-                                    <input type="text" class="form-control" id="name" name="catname" value="" required>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                                </div>
-                                <?php echo form_close(); ?>
-                              
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
-                <!-- code for show modal -->
+   <!-- code for show modal -->
                 <?php if ($this->session->flashdata('validation2')) {?>
                 <?php echo '<script>$("#editUserModal").modal("show");</script>'; ?>
                 <?php }?>

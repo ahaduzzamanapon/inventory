@@ -18,10 +18,21 @@ class itemcontroller extends CI_Controller
 	{
 
 
+        
+ $this->db->select('items.id, items.itemname, categories.catname, subcategories.subcname, units.unitName, items.price, items.quantity, items.status, items.image');
+ $this->db->from('items');
+$this->db->join('categories', 'categories.id = items.catid');
+$this->db->join('subcategories', 'subcategories.sid = items.subid');
+$this->db->join('units', 'units.unitid = items.unitid');
+$query = $this->db->get();
+$items = $query->result();
+
+
+
         $data['categories'] = $this->db->get('categories')->result();
-        $data['items'] = $this->db->get('items')->result();
         $units = $this->Unit->showAllData();
         $data['units'] = $units;
+        $data['items'] = $items;
         $data['validationerrorstor'] = $this->session->flashdata('validationerrorstor');
         $data['imageerror'] = $this->session->flashdata('imageerror');
        
@@ -32,6 +43,26 @@ class itemcontroller extends CI_Controller
 
 
 	}
+
+    public function itemtest()
+	{
+
+ $this->db->select('items.id, items.itemname, categories.catname, subcategories.subcname, units.unitName, items.price, items.quantity, items.status, items.image');
+ $this->db->from('items');
+$this->db->join('categories', 'categories.id = items.catid');
+$this->db->join('subcategories', 'subcategories.sid = items.subid');
+$this->db->join('units', 'units.unitid = items.unitid');
+$query = $this->db->get();
+$result = $query->result();
+print_r($result);
+
+
+
+        
+
+
+	}
+
 
     public function get_subcategories() {
         $categoryId = $this->input->post('category_id');
@@ -111,6 +142,21 @@ class itemcontroller extends CI_Controller
             redirect($this->agent->referrer());
         }
     }
+}
+
+public function edit($id){
+
+    
+    $this->db->where('id', $id);
+    $query = $this->db->get('items');
+    return $query->row();
+
+
+
+
+
+
+
 }
 
     
