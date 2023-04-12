@@ -45,7 +45,7 @@
                             <a href="<?php echo base_url(); ?>unitController">Unit</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>itemcontroller">Unit</a>
+                            <a href="<?php echo base_url(); ?>itemcontroller">Item</a>
                         </li>
                     </ul>
                 </li>
