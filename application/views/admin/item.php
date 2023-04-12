@@ -103,22 +103,14 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                <!-- <tbody>
+                <tbody>
                     <?php foreach ($items as $item): ?>
                     <tr>
-                        <td><?php echo $cat->catname; ?></td>
-                        <td>
-                            <a href="#" class="btn btn-primary" id="editUserModalLink" data-toggle="modal"
-                                data-target="#editUserModal" data-id="<?php echo $cat->id; ?>"
-                                data-catname="<?php echo $cat->catname; ?>">Edit</a>
-                            <a href="<?php echo base_url('admin/delete/' . $cat->id); ?>" class="btn btn-danger btn-sm"
-                                onclick="return confirm('Are you sure you want to delete this user?');">
-                                Delete
-                            </a>
-                        </td>
+                        <td><?php echo $item->catname; ?></td>
+                       
                     </tr>
                     <?php endforeach;?>
-                </tbody> -->
+                </tbody>
 
 
 <!-- start modal to stor item  -->

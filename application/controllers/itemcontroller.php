@@ -19,6 +19,7 @@ class itemcontroller extends CI_Controller
 
 
         $data['categories'] = $this->db->get('categories')->result();
+        $data['items'] = $this->db->get('items')->result();
         $units = $this->Unit->showAllData();
         $data['units'] = $units;
         $data['validationerrorstor'] = $this->session->flashdata('validationerrorstor');
