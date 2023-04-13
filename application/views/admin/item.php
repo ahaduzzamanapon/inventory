@@ -119,7 +119,16 @@
                         <td><?php echo $item->itemname ?></td>
                         <td><?php echo $item->catname ?></td>
                         <td><?php echo $item->subcname ?></td>
-                        <td><?php echo $item->status ?></td>
+                        <td>
+                            <?php 
+                                if ($item->status == 1) {
+                                    echo 'active';
+                                } else if ($item->status == 0) {
+                                    echo 'inactive';
+                                }
+                            ?>
+                        </td>
+
                         
                         <td>
                             <a class="btn btn-sm btn-success" href="<?php echo base_url('itemcontroller/edit/'. $item->id);?>" >
