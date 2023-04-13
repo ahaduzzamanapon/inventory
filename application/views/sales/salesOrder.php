@@ -38,23 +38,23 @@
                 </ul>
             </div>
         </nav>
-        <?php #dd($subCategoryData); ?>
+      
         <form action="" method="">
-            <label for="inputCategory">Select Category</label>
-                <select class="form-control col-md-9" id="SelectCategory" name="SelectCategory">
-                    <!-- <option>Select Category</option> -->
-                    <?php foreach($categoryData as $item):?>
-                        <option name="category" value="<?php echo $item->id; ?>"> <?php echo $item->catname; ?></option>
-                    <?php endforeach; ?>
-                </select>
-            <br>
-            <label for="inputSubCategory">Select Sub-Category</label>
-            <select class="form-control col-md-9" id="SelectSubCategory" name="SelectSubCategory">
-                <!-- <option>Select Sub-Category</option>    -->
-                <?php #foreach($subCategoryData as $item):?>
-                <!--     <option name="subCategory" value="<?php #echo $item->sid; ?>"> <?php #echo $item->subcname; ?></option>
-                <?php #endforeach; ?> -->
-            </select>
+        <div class="form-group">
+                                    <label for="name">Select Category</label>
+                                    <select class="form-control" name="category" required >
+                                        <?php foreach($categories as $category) { ?>
+                                            <option value="<?php echo $category->id; ?>"><?php echo $category->catname; ?></option>
+                                        <?php } ?>
+                                    </select>
+                                    <?php echo form_error('category'); ?>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Select Sub-Category</label>
+                                    <select class="form-control" name="subcategory" required>
+                                    </select>     
+                                    <?php echo form_error('subcategory'); ?>
+                                </div>
             <br>
             <label for="inputItem"><b>Items</b></label>
             <table class="table table-hover">
@@ -88,36 +88,33 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
  
+    <script>
+    $(document).ready(function() {
+        $('#sidebarCollapse').on('click', function() {
+            $('#sidebar').toggleClass('active');
+        });
+    });
+    </script>
+
+
+
 <script>
-$(document).ready(function () {
-            $('#sidebarCollapse').on('click', function () {
-                $('#sidebar').toggleClass('active');
-            });
-        });
-
-        // setTimeout("location.reload(true);", 2000);
-
-        document.addEventListener('DOMContentLoaded', function() 
-        {
-            var categoryDropdown = document.querySelector('select[name="category"]');
-            dd(categoryDropdown);
-            categoryDropdown.addEventListener('change', function() 
-            {
-                var categoryId = this.value;
-                var xhr = new XMLHttpRequest();
-                xhr.onreadystatechange = function() 
-                {
-                    if (xhr.readyState === 4 && xhr.status === 200) 
-                    {
-                        var subcategoryDropdown = document.querySelector('select[name="subCategory"]');
-                        subcategoryDropdown.innerHTML = xhr.responseText;
-                    }
-                };
-                xhr.open('POST', '<?php echo base_url("salesOrderController/get_subcategories"); ?>');
-                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                xhr.send('category_id=' + categoryId);
-            });
-        });
+   document.addEventListener('DOMContentLoaded', function() {
+  var categoryDropdown = document.querySelector('select[name="category"]');
+  categoryDropdown.addEventListener('change', function() {
+    var categoryId = this.value;
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var subcategoryDropdown = document.querySelector('select[name="subcategory"]');
+        subcategoryDropdown.innerHTML = xhr.responseText;
+      }
+    };
+    xhr.open('POST', '<?php echo base_url("itemcontroller/get_subcategories"); ?>');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send('category_id=' + categoryId);
+  });
+});
 
 </script>
 
