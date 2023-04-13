@@ -41,7 +41,7 @@
         <?php #dd($subCategoryData); ?>
         <form action="" method="">
             <label for="inputCategory">Select Category</label>
-                <select class="form-control" id="SelectCategory" name="SelectCategory">
+                <select class="form-control col-md-9" id="SelectCategory" name="SelectCategory">
                     <!-- <option>Select Category</option> -->
                     <?php foreach($categoryData as $item):?>
                         <option name="category" value="<?php echo $item->id; ?>"> <?php echo $item->catname; ?></option>
@@ -49,7 +49,7 @@
                 </select>
             <br>
             <label for="inputSubCategory">Select Sub-Category</label>
-            <select class="form-control" id="SelectSubCategory" name="SelectSubCategory">
+            <select class="form-control col-md-9" id="SelectSubCategory" name="SelectSubCategory">
                 <!-- <option>Select Sub-Category</option>    -->
                 <?php #foreach($subCategoryData as $item):?>
                 <!--     <option name="subCategory" value="<?php #echo $item->sid; ?>"> <?php #echo $item->subcname; ?></option>
@@ -100,6 +100,7 @@ $(document).ready(function () {
         document.addEventListener('DOMContentLoaded', function() 
         {
             var categoryDropdown = document.querySelector('select[name="category"]');
+            dd(categoryDropdown);
             categoryDropdown.addEventListener('change', function() 
             {
                 var categoryId = this.value;
