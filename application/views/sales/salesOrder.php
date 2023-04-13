@@ -41,23 +41,23 @@
         <?php #dd($subCategoryData); ?>
         <form action="" method="">
             <label for="inputCategory">Select Category</label>
-                <select class="form-control col-md-9" id="SelectCategory" name="SelectCategory">
-                    <!-- <option>Select Category</option> -->
+                <select class="form-control col-md-9" id="category" name="category">
+                    <option>Select Category</option>
                     <?php foreach($categoryData as $item):?>
-                        <option name="category" value="<?php echo $item->id; ?>"> <?php echo $item->catname; ?></option>
+                        <option value="<?php echo $item->id; ?>"> <?php echo $item->catname; ?></option>
                     <?php endforeach; ?>
                 </select>
             <br>
             <label for="inputSubCategory">Select Sub-Category</label>
-            <select class="form-control col-md-9" id="SelectSubCategory" name="SelectSubCategory">
-                <!-- <option>Select Sub-Category</option>    -->
+            <select class="form-control col-md-9" id="SelectSubCategory" name="subCategory">
+                <option>Select Sub-Category</option>   
                 <?php #foreach($subCategoryData as $item):?>
                 <!--     <option name="subCategory" value="<?php #echo $item->sid; ?>"> <?php #echo $item->subcname; ?></option>
                 <?php #endforeach; ?> -->
             </select>
             <br>
             <label for="inputItem"><b>Items</b></label>
-            <table class="table table-hover">
+            <table class="table table-hover col-md-9">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -100,7 +100,7 @@ $(document).ready(function () {
         document.addEventListener('DOMContentLoaded', function() 
         {
             var categoryDropdown = document.querySelector('select[name="category"]');
-            dd(categoryDropdown);
+            console.log(categoryDropdown);
             categoryDropdown.addEventListener('change', function() 
             {
                 var categoryId = this.value;
@@ -113,11 +113,29 @@ $(document).ready(function () {
                         subcategoryDropdown.innerHTML = xhr.responseText;
                     }
                 };
-                xhr.open('POST', '<?php echo base_url("salesOrderController/get_subcategories"); ?>');
+                xhr.open('POST', '<?php echo base_url("itemcontroller/get_subcategories"); ?>');
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
                 xhr.send('category_id=' + categoryId);
             });
+
         });
+
+        // $(document).ready(function(){
+        //     $('#SelectCategory').change(function(){
+        //         var cat_id = $(this).val();
+        //         console.log(cat_id);
+        //         $.ajax({
+        //             url:"<?php #echo base_url(); ?>salesOrderController/get_subcategories",
+        //             method:"POST",
+        //             data:{cat_id:cat_id},
+        //             success:function(data)
+        //             {
+        //                 $('#SelectSubCategory').html(data);
+        //             }
+        //         });
+        //         // console.log(cat_id);
+        //     });
+        // });
 
 </script>
 

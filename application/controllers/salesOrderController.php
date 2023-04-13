@@ -17,27 +17,30 @@ class salesOrderController extends CI_Controller
     }
 
 
-	
-	public function index()
-	{
+
+    public function index()
+    {
         $categoryData = $this->catmodel->get_categories();
         $subCategoryData = $this->Sales->getAllSubCategories();
         $unitData = $this->Unit->showAllData();
         // dd($unitData);
         $this->load->view('sales/salesOrder', compact('categoryData', 'subCategoryData', 'unitData'));
-	}
+    }
 
-    public function get_subcategories() {
+    public function get_subcategories()
+    {
         $categoryId = $this->input->post('category_id');
-        //  dd($categoryId);
         $subcategories = $this->db->get_where('subcategories', array('catname' => $categoryId))->result();
-        // dd($subcategories);
+        
         $html = '<option value="">Select Subcategory</option>';
-        foreach($subcategories as $subcategory) 
+        foreach($subcategories as $subcategory)
         {
             $html .= '<option value="'.$subcategory->sid.'">'.$subcategory->subcname.'</option>';
         }
         echo $html;
+        // if($this->input->post('category_id')) {
+        //     echo $this->Sales->fetch_subcategories($this->input->post('category_id'));
+        // }
     }
 }
-    ?>
+?>
