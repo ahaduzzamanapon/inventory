@@ -108,7 +108,7 @@
                 <tbody>
                     <?php foreach ($items as $key => $item): ?>
                     <tr>
-                        <td><?php echo $key ?></td>
+                        <td><?php echo $key+1 ?></td>
                         <td>
 
                         <img src="<?php echo base_url('upload/' . $item->image); ?>" alt="My Image" height="40px" width="50px">
@@ -123,7 +123,10 @@
                         
                         <td>
                             <a class="btn btn-sm btn-success" href="<?php echo base_url('itemcontroller/edit/'. $item->id);?>" >
-                                edit
+                                Edit
+                            </a>
+                            <a class="btn btn-sm btn-danger" href="<?php echo base_url('itemcontroller/delete/'. $item->id);?>" >
+                                Delete
                             </a>
                             
                     </td>

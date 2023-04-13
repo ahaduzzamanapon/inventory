@@ -21,13 +21,13 @@ class Unit extends CI_Model {
     // }
 
 
-    // public function get_user_by_id($id)
-    // {
-    //     // Get the user by ID
-    //     $this->db->where('id', $id);
-    //     $query = $this->db->get('categories');
-    //     return $query->row();
-    // }
+    public function get_unit_by_id($id)
+    {
+       
+        $this->db->where('unitId', $id);
+        $query = $this->db->get('units');
+        return $query->row();
+    }
 
     // public function delete_user($id)
     // {

@@ -35,6 +35,8 @@ class itemcontroller extends CI_Controller
                 $data['items'] = $items;
                 $data['validationerrorstor'] = $this->session->flashdata('validationerrorstor');
                 $data['imageerror'] = $this->session->flashdata('imageerror');
+                $data['success'] = $this->session->flashdata('success');
+                $data['error'] = $this->session->flashdata('error');
        
 
 
@@ -119,10 +121,7 @@ print_r($result);
     
             if (!$this->upload->do_upload('image'))
             {
-                // File upload failed, show error message
-                $this->session->set_flashdata('imageerror', $this->upload->display_errors());
-                $this->load->library('user_agent');
-                redirect($this->agent->referrer());
+              echo"upload failed";
             }
             else
             {
@@ -141,25 +140,124 @@ print_r($result);
 
 public function edit($id){
 
-    
+// get item from database
     $this->db->where('id', $id);
     $query = $this->db->get('items');
     $item=$query->row();
 
+// get category
+    $this->load->model('catmodel');
+    $catdeteils=$this->catmodel->get_user_by_id($item->catid);
+
+// get Subcategory
+    $this->load->model('subModel');
+    $subcatdeteils=$this->subModel->get_sub_categories($item->subid);
+
+    // get unit 
+    $this->load->model('Unit');
+    $unitdeteils = $this->Unit->get_unit_by_id($item->unitid);
+
+if($item->status==1){
+    $stutusd=array('value'=>1, 'name'=>'active');
+}else{
+    $stutusd=array('value'=>0, 'name'=>'Inactive');
+}
 
 
-    $data['item'] = $item;
+    $data['categories'] = $this->db->get('categories')->result();
+    $units = $this->Unit->showAllData();
+    $data['units'] = $units;
+    $data['stutusd'] = $stutusd;
   
-
-
-
-
+    $data['item'] = $item;
+    $data['catdeteils'] = $catdeteils;
+    $data['subcatdeteils'] = $subcatdeteils;
+    $data['unitdeteils'] = $unitdeteils;
 $this->load->view('admin/edititem',$data);
    
 
 }
 
     
+
+
+public function update_item()
+{
+    // Sanitize the ID parameter to prevent SQL injection attacks
+    $id =  $this->input->post('itemid');
+  
+    
+
+    
+    
+    $data = array(
+        'itemname' => $this->input->post('itemname'),
+        'catid' => $this->input->post('category'),
+        'subid' => $this->input->post('subcategory'),
+        'unitid' => $this->input->post('unit'),
+        'price' => $this->input->post('price'),
+        'quantity' => $this->input->post('quantity'),
+        'status' => $this->input->post('status')
+    );
+
+    
+
+    if ($this->input->post('myImage')=="hi") {
+        
+         // Store image on local storage and send image name to the database
+         $config['upload_path'] = './upload/';
+         $config['allowed_types'] = 'gif|jpg|png';
+         $config['file_name'] = uniqid(); // add an auto-generated unique id as the filename
+ 
+         $this->load->library('upload', $config);
+ 
+         if (!$this->upload->do_upload('image'))
+         {
+           // Show success message and redirect to previous page
+        $this->session->set_flashdata('success', 'please try again update image formate gif|jpg|png ');
+        redirect('itemcontroller/index');
+         }
+         else
+         {
+             // File upload succeeded, store image name in the database
+             $data['image'] = $this->upload->data('file_name');
+            
+         }
+       
+    }
+
+    
+        // Update the item in the database
+        $this->db->where('id', $id);
+        $this->db->update('items', $data);
+    
+        // Show success message and redirect to previous page
+        $this->session->set_flashdata('success', 'Record updated successfully');
+       redirect('itemcontroller/index');
+    }
+    
+
+
+    public function delete($id){
+       
+
+        $this->load->model('itemmodel');
+        $deleted= $this->itemmodel->delete($id);
+        
+      if($deleted==false){
+        $this->session->set_flashdata('success', 'Data delete successfully.');
+    
+        // Redirect to another function
+        redirect('itemcontroller');
+      }else{
+           
+        $this->session->set_flashdata('error', 'Data delete Unsuccessfully.');
+    
+        // Redirect to another function
+        redirect('itemcontroller');
+      }
+        
+    }
 
 }
 ?>
