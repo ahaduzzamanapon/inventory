@@ -31,6 +31,7 @@ class salesOrderController extends CI_Controller
         $categoryId = $this->input->post('category_id');
         //  dd($categoryId);
         $subcategories = $this->db->get_where('subcategories', array('catname' => $categoryId))->result();
+         dd($subcategories);
         $html = '<option value="">Select Subcategory</option>';
         foreach($subcategories as $subcategory) 
         {

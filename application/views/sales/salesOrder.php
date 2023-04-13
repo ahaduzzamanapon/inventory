@@ -50,10 +50,10 @@
             <br>
             <label for="inputSubCategory">Select Sub-Category</label>
             <select class="form-control" id="SelectSubCategory" name="SelectSubCategory">
-                <option>Select Sub-Category</option>   
-                <!-- <?php foreach($subCategoryData as $item):?>
-                    <option name="subCategory" value="<?php echo $item->sid; ?>"> <?php echo $item->subcname; ?></option>
-                <?php endforeach; ?> -->
+                <!-- <option>Select Sub-Category</option>    -->
+                <?php #foreach($subCategoryData as $item):?>
+                <!--     <option name="subCategory" value="<?php #echo $item->sid; ?>"> <?php #echo $item->subcname; ?></option>
+                <?php #endforeach; ?> -->
             </select>
             <br>
             <label for="inputItem"><b>Items</b></label>
