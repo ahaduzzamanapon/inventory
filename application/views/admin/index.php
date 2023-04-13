@@ -50,6 +50,10 @@
                         <li>
                             <a href="<?php echo base_url(); ?>itemcontroller">Item</a>
                         </li>
+
+                        <li>
+                            <a href="<?php echo base_url(); ?>OrderController">Order</a>
+                        </li>
                        
                     </ul>
                 </li>
