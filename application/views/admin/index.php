@@ -47,6 +47,9 @@
                         <li class="active">
                             <a href="<?php echo base_url(); ?>admin/unit">Unit</a>
                         </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>itemcontroller">Item</a>
+                        </li>
                        
                     </ul>
                 </li>
@@ -69,6 +72,8 @@
                         <i class="fas fa-align-left"></i>
                         <span>Menu</span>
                     </button>
+                    <a href="<?php echo site_url('Logout');?>" class="btn btn-success btn-sm btn-inline" style="color:#fff;">Logout</a>
+
                    
 
                     
@@ -77,7 +82,27 @@
 <!-- main content start  -->
 
 
-hello
+   
+        <div class="container">
+
+        
+
+
+            <div class="signup-form">
+            <h1 class="text-center bg-info">Welcome Back to Admin Dashboard</h1>
+            <form>
+            <div class="form-group"style="font-size:40px; color:#000;" align="center">
+              I am Mr  <?php echo $firstname?> 
+            </div>
+      
+            </form>
+           </div>
+
+
+
+
+
+
 
 <!-- main content end  -->
 

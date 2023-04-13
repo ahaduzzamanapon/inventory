@@ -44,6 +44,9 @@
                         <li>
                             <a href="<?php echo base_url(); ?>unitController">Unit</a>
                         </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>itemcontroller">Item</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -60,6 +63,8 @@
                         <i class="fas fa-align-left"></i>
                         <span>Menu</span>
                     </button>
+
+                    <a href="<?php echo site_url('Logout');?>" class="btn btn-success btn-sm btn-inline" style="color:#fff;">Logout</a>
                 </div>
             </nav>
 
@@ -70,10 +75,28 @@
                 <?php echo $this->session->flashdata('success'); ?>
             </div>
             <?php }?>
+           
+
+          
+
 
             <?php if ($this->session->flashdata('error')) {?>
             <div class="alert alert-danger">
                 <?php echo $this->session->flashdata('error'); ?>
+            </div>
+            <?php }?>
+
+            <?php if ($this->session->flashdata('data')) {?>
+            <div class="alert alert-success">
+                <?php $sid=$this->session->flashdata('data'); ?>
+                <?php echo form_open(base_url('admin/forcedlt')); ?>
+  <input type="hidden" name="sid[]" value="<?php echo implode(",", $sid); ?>">
+  <p>Do you want delete these subcategory click force to delete </p>
+  <button   onclick="return confirm('Are you sure you want to delete these Subcategory?')" class="btn btn-danger" type="submit">Force to delete</button>
+  <?php echo form_close(); ?>
+
+</form>
+
             </div>
             <?php }?>
 

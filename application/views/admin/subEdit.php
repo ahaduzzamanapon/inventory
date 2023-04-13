@@ -47,6 +47,9 @@
                         <li>
                             <a href="<?php echo base_url(); ?>unitController">Unit</a>
                         </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>itemcontroller">Item</a>
+                        </li>
                        
                     </ul>
                 </li>
@@ -69,7 +72,7 @@
                         <i class="fas fa-align-left"></i>
                         <span>Menu</span>
                     </button>
-                   
+                    <a href="<?php echo site_url('Logout');?>" class="btn btn-success btn-sm btn-inline" style="color:#fff;">Logout</a>
 
                     
                 </div>
@@ -89,7 +92,7 @@
                 </select>
                
                  
-                <input type="text" class="form-control mt-2" value="<?php echo ($item->subcname);?>" name="subname">
+                <input type="text" class="form-control mt-2" value="<?php echo ($item->subcname);?>" name="subname" required>
                  
                 <input type="hidden" class="form-control mt-2" value="<?php echo ($item->sid);?>" name="subId">
                 <input type="submit" class="form-control mt-2 btn btn-sm btn-primary" name="Submit">
