@@ -212,7 +212,9 @@
 			}
 		});
 
-       $(document).on('click', '#add', function(){
+        $(document).on('click', '#add', function(){
+            var quantity = parseInt($(this).siblings('.quantity').val());
+
     var itemid = $(this).data("custom-value");
     var quantity = 1; // Set the default quantity to 1
 
@@ -227,7 +229,7 @@
                 var subtotal = 0;
                 if(data.length > 0){
                     for(var i=0; i<data.length; i++){
-                        var itemSubtotal = parseFloat(data[i].price) * parseFloat(data[i].quantity);
+                        var itemSubtotal = parseFloat(data[i].price) * parseFloat(quantity);
                         subtotal += itemSubtotal;
                         html += '<tr>'+
                                     '<td>'+data[i].itemname+'</td>'+
@@ -239,37 +241,44 @@
                                             '<button class="btn btn-outline-secondary increase-quantity" type="button">+</button>'+
                                         '</div>'+
                                     '</td>'+
-                                    '<td>'+itemSubtotal.toFixed(2)+'</td>'+
+                                    '<td>'+itemSubtotal+'</td>'+
                                 '</tr>';
                     }
                     html += '<tr>'+
                                 '<td colspan="3" class="text-end fw-bold">Total:</td>'+
-                                '<td class="fw-bold">'+subtotal.toFixed(2)+'</td>'+
+                                '<td class="fw-bold">'+subtotal+'</td>'+
                             '</tr>';
                 }
                 else{
                     html += '<tr><td colspan="4">No Items found</td></tr>';
                 }
-                $('#cart_table tbody').html(html); // Replace the cart table contents with the new HTML
+                $('#cart_table tbody').append(html); // Replace the cart table contents with the new HTML
             }
         });
-    }
-    else{
-        
     }
 });
 
 $(document).on('click', '.increase-quantity', function(){
     var quantityInput = $(this).siblings('.quantity');
+var quantity = parseInt(quantityInput.val());
+    var quantityInput = $(this).siblings('.quantity');
     var quantity = parseInt(quantityInput.val()) + 1;
+    var price = parseFloat($(this).closest('tr').find('td:nth-child(2)').text());
+    var subtotal = price * quantity;
     quantityInput.val(quantity);
+    $(this).closest('tr').find('td:nth-child(4)').text(subtotal);
+    updateTotals();
 });
 
 $(document).on('click', '.decrease-quantity', function(){
     var quantityInput = $(this).siblings('.quantity');
     var quantity = parseInt(quantityInput.val()) - 1;
     if(quantity >= 1){
+        var price = parseFloat($(this).closest('tr').find('td:nth-child(2)').text());
+        var subtotal = price * quantity;
         quantityInput.val(quantity);
+        $(this).closest('tr').find('td:nth-child(4)').text(subtotal);
+        updateTotals();
     }
 });
 
@@ -278,7 +287,21 @@ $(document).on('input', '.quantity', function(){
     if(isNaN(quantity) || quantity < 1){
         $(this).val(1);
     }
+    else{
+        var price = parseFloat($(this).closest('tr').find('td:nth-child(2)').text());
+        var subtotal = price * quantity;
+        $(this).closest('tr').find('td:nth-child(4)').text(subtotal);
+        updateTotals();
+    }
 });
+
+function updateTotals(){
+    var subtotal = 0;
+    $('.cart-item').each(function(){
+        subtotal += itemSubtotal;
+});
+$('#cart_table tfoot td:nth-child(2)').text(subtotal);
+}
 
 
 
