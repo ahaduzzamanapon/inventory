@@ -81,19 +81,18 @@
      <div class="container-fluid ">
         <div class="row">
 
-        <table id="cart_table" class="table">
-    <thead>
-        <tr>
-            <th>Item Name</th>
-            <th>Price</th>
-            <th>Quantity</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- Cart items will be added here -->
-    </tbody>
-</table>
-
+                <table  class="table table-hover" id="item_add_table">
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                           
+                            <th>Price</th>
+                            <th>Available Items</th>       
+                            <th>Action</th>       
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
             </div>
           </div>
 
@@ -169,14 +168,14 @@
                                                 html += '<tr><td colspan="5">No Items found</td></tr>';
                                                 }
                                                 $('#item_table tbody').html(html);
-                  }
-                 });
-                 }
-                else{
-                $('#item_table tbody').html('');
-               }
-             });
-             $('#search').on('input', function(){
+                                                }
+                                                });
+                                                }
+                                                else{
+                                                $('#item_table tbody').html('');
+                                                }
+                                                });
+                                                $('#search').on('input', function(){
 			var search_text = $(this).val();
 			if(search_text != ''){
 				$.ajax({
@@ -212,74 +211,43 @@
 			}
 		});
 
-       $(document).on('click', '#add', function(){
-    var itemid = $(this).data("custom-value");
-    var quantity = 1; // Set the default quantity to 1
+        $('#add').click(function(){
+                var itemid = $(this).data("custom-value");
+              
 
-    if(itemid != ''){
-        $.ajax({
-            url:"<?php echo base_url('item/add_item_to_cart'); ?>",
-            method:"POST",
-            data:{itemid:itemid, quantity:quantity},
-            dataType:"json",
-            success:function(data){
-                var html = '';
-                var subtotal = 0;
-                if(data.length > 0){
-                    for(var i=0; i<data.length; i++){
-                        var itemSubtotal = parseFloat(data[i].price) * parseFloat(data[i].quantity);
-                        subtotal += itemSubtotal;
-                        html += '<tr>'+
-                                    '<td>'+data[i].itemname+'</td>'+
-                                    '<td>'+data[i].price+'</td>'+
-                                    '<td>'+
-                                        '<div class="input-group">'+
-                                            '<button class="btn btn-outline-secondary decrease-quantity" type="button">-</button>'+
-                                            '<input type="number" class="form-control quantity" value="'+quantity+'" readonly>'+
-                                            '<button class="btn btn-outline-secondary increase-quantity" type="button">+</button>'+
-                                        '</div>'+
-                                    '</td>'+
-                                    '<td>'+itemSubtotal.toFixed(2)+'</td>'+
-                                '</tr>';
-                    }
-                    html += '<tr>'+
-                                '<td colspan="3" class="text-end fw-bold">Total:</td>'+
-                                '<td class="fw-bold">'+subtotal.toFixed(2)+'</td>'+
-                            '</tr>';
-                }
-                else{
-                    html += '<tr><td colspan="4">No Items found</td></tr>';
-                }
-                $('#cart_table tbody').html(html); // Replace the cart table contents with the new HTML
-            }
-        });
-    }
-    else{
-        
-    }
-});
-
-$(document).on('click', '.increase-quantity', function(){
-    var quantityInput = $(this).siblings('.quantity');
-    var quantity = parseInt(quantityInput.val()) + 1;
-    quantityInput.val(quantity);
-});
-
-$(document).on('click', '.decrease-quantity', function(){
-    var quantityInput = $(this).siblings('.quantity');
-    var quantity = parseInt(quantityInput.val()) - 1;
-    if(quantity >= 1){
-        quantityInput.val(quantity);
-    }
-});
-
-$(document).on('input', '.quantity', function(){
-    var quantity = parseInt($(this).val());
-    if(isNaN(quantity) || quantity < 1){
-        $(this).val(1);
-    }
-});
-
+				if(itemid != ''){
+					$.ajax({
+						url:"<?php echo base_url('item/add_item_to_cart'); ?>",
+						method:"POST",
+						data:{itemid:itemid},
+						dataType:"json",
+						success:function(data){
+                            var html = '';
+						if(data.length > 0){
+							for(var i=0; i<data.length; i++){
+								html += '<tr>'+
+											'<td>'+data[i].itemname+'</td>'+
+											
+											'<td>'+data[i].price+'</td>'+
+											'<td>'+data[i].quantity+'</td>'+
+											'<td> <button data-custom-value="'+data[i].id+'" id="add" href="<?php echo base_url('add'); ?>" class="btn btn-primary">add</button>'
+                                            
+                                            // +data[i].id+
+                                            '</td>'+
+										'</tr>';
+							}
+						}
+						else{
+							html += '<tr><td colspan="5">No Items found</td></tr>';
+						}
+						$('#item_add_table tbody').html(html);
+						}
+					});
+				}
+				else{
+					
+				}
+			});
 
 
 
