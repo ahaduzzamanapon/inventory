@@ -35,6 +35,16 @@ class Item extends CI_Controller {
 		
 		echo json_encode($subcategories);
 	}
+	public function add_item_to_cart(){
+		// Get subcategories for selected category
+		
+		$this->db->from('items');
+		$this->db->where('itemid', $this->input->post('itemid'));
+		$query = $this->db->get();
+		$items = $query->result_array();
+		
+		echo json_encode($items);
+	}
 
 	public function get_items(){
 		// Get items for selected subcategory

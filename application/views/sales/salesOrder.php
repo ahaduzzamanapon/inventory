@@ -13,6 +13,7 @@
 
 <!-- <script type = 'text/javascript' src = "<?php #echo base_url(); ?>js/sample.js"></script> -->
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 
 
@@ -42,10 +43,12 @@
       
                                 <div class="form-group">
                                     <label for="name">Select Category</label>
-                                    <select class="form-control" name="category" required >
-                                        <?php foreach($categories as $category) { ?>
+                                   
+                                    <select  class="form-control" id="category">
+                                        <option value="">Select Category</option>
+                                        <?php foreach($categories as $category): ?>
                                             <option value="<?php echo $category->id; ?>"><?php echo $category->catname; ?></option>
-                                        <?php } ?>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                                 <div class="form-group">
@@ -87,35 +90,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
  
-    <script>
-    $(document).ready(function() {
-        $('#sidebarCollapse').on('click', function() {
-            $('#sidebar').toggleClass('active');
-        });
-    });
-    </script>
-
-
-
-<script>
-   document.addEventListener('DOMContentLoaded', function() {
-  var categoryDropdown = document.querySelector('select[name="category"]');
-  categoryDropdown.addEventListener('change', function() {
-    var categoryId = this.value;
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-      if (xhr.readyState === 4 && xhr.status === 200) {
-        var subcategoryDropdown = document.querySelector('select[name="subcategory"]');
-        subcategoryDropdown.innerHTML = xhr.responseText;
-      }
-    };
-    xhr.open('POST', '<?php echo base_url("itemcontroller/get_subcategories"); ?>');
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.send('category_id=' + categoryId);
-  });
-});
-
-</script>
+   
 
  
         
