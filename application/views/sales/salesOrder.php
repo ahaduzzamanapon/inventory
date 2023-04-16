@@ -39,15 +39,14 @@
             </div>
         </nav>
       
-        <form action="" method="">
-        <div class="form-group">
+      
+                                <div class="form-group">
                                     <label for="name">Select Category</label>
                                     <select class="form-control" name="category" required >
                                         <?php foreach($categories as $category) { ?>
                                             <option value="<?php echo $category->id; ?>"><?php echo $category->catname; ?></option>
                                         <?php } ?>
                                     </select>
-                                    <?php echo form_error('category'); ?>
                                 </div>
                                 <div class="form-group">
                                     <label for="name">Select Sub-Category</label>
