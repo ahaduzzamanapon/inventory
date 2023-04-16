@@ -39,7 +39,7 @@ class Item extends CI_Controller {
 		// Get subcategories for selected category
 		
 		$this->db->from('items');
-		$this->db->where('itemid', $this->input->post('itemid'));
+		$this->db->where('id', $this->input->post('itemid'));
 		$query = $this->db->get();
 		$items = $query->result_array();
 		
