@@ -212,22 +212,22 @@
 			}
 		});
 
-        $(document).on('click', '#add', function(){
+       $(document).on('click', '#add', function(){
     var itemid = $(this).data("custom-value");
-    var quantity1 = 1; // Set the default quantity to 1
+    var quantity = 1; // Set the default quantity to 1
 
     if(itemid != ''){
         $.ajax({
             url:"<?php echo base_url('item/add_item_to_cart'); ?>",
             method:"POST",
-            data:{itemid:itemid, quantity1:quantity1},
+            data:{itemid:itemid, quantity:quantity},
             dataType:"json",
             success:function(data){
                 var html = '';
                 var subtotal = 0;
                 if(data.length > 0){
                     for(var i=0; i<data.length; i++){
-                        var itemSubtotal = parseFloat(data[i].price) * parseFloat(quantity1);
+                        var itemSubtotal = parseFloat(data[i].price) * parseFloat(data[i].quantity);
                         subtotal += itemSubtotal;
                         html += '<tr>'+
                                     '<td>'+data[i].itemname+'</td>'+
@@ -235,7 +235,7 @@
                                     '<td>'+
                                         '<div class="input-group">'+
                                             '<button class="btn btn-outline-secondary decrease-quantity" type="button">-</button>'+
-                                            '<input type="number" class="form-control quantity1" value="'+quantity1+'" readonly>'+
+                                            '<input type="number" class="form-control quantity" value="'+quantity+'" readonly>'+
                                             '<button class="btn btn-outline-secondary increase-quantity" type="button">+</button>'+
                                         '</div>'+
                                     '</td>'+
@@ -260,22 +260,22 @@
 });
 
 $(document).on('click', '.increase-quantity', function(){
-    var quantityInput = $(this).siblings('.quantity1');
-    var quantity1 = parseInt(quantityInput.val()) + 1;
-    quantityInput.val(quantity1);
+    var quantityInput = $(this).siblings('.quantity');
+    var quantity = parseInt(quantityInput.val()) + 1;
+    quantityInput.val(quantity);
 });
 
 $(document).on('click', '.decrease-quantity', function(){
-    var quantityInput = $(this).siblings('.quantity1');
-    var quantity1 = parseInt(quantityInput.val()) - 1;
-    if(quantity1 >= 1){
-        quantityInput.val(quantity1);
+    var quantityInput = $(this).siblings('.quantity');
+    var quantity = parseInt(quantityInput.val()) - 1;
+    if(quantity >= 1){
+        quantityInput.val(quantity);
     }
 });
 
-$(document).on('input', '.quantity1', function(){
-    var quantity1 = parseInt($(this).val());
-    if(isNaN(quantity1) || quantity1 < 1){
+$(document).on('input', '.quantity', function(){
+    var quantity = parseInt($(this).val());
+    if(isNaN(quantity) || quantity < 1){
         $(this).val(1);
     }
 });
