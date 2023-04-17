@@ -33,7 +33,7 @@
                         <a class="nav-link" href="<?php echo base_url();?>salesOrder">Create New Order <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">View Orders</a>
+                        <a class="nav-link" href="<?php echo base_url();?>allorders">View Orders</a>
                     </li>
                 </ul>
             </div>
