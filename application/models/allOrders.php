@@ -28,9 +28,28 @@ class allOrders extends CI_Model {
     public function delivered($id)
     {
         $this->db->set('status', 3);
+        // $this->db->set('quantity', $quantity);
         $this->db->where('orderId', $id);
         $this->db->update('allorders');
+        $itemId = $this->db->select('itemId')->from('allorders')->where('orderId', $id)->get()->result();
+        $quantity = $this->db->select('quantity')->from('allorders')->where('orderId', $id)->get()->result();
+        self::updateQuantity($itemId, $quantity);
 
+    }
+    public function updateQuantity($itemId, $quantity){
+        // dd($itemId[0]->itemId);
+       // dd($quantity[0]->quantity);
+        
+        // $dbquantity = $this->db->from('items')->where('id', $itemId)->get()->result();
+        $this->db->select('quantity');
+        $this->db->from('items');
+        $this->db->where('id', $itemId[0]->itemId);
+        $result = $this->db->get()->result();
+       // dd($result[0]->quantity);
+        //dd($result);
+        $this->db->set('quantity', $result[0]->quantity-$quantity[0]->quantity);
+        $this->db->where('id', $itemId[0]->itemId);
+        $this->db->update('items');
     }
 
 
