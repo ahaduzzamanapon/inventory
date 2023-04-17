@@ -16,10 +16,10 @@
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="<?php echo base_url();?>salesOrder">Create New Order <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="<?php echo base_url();?>item">Create New Order <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">View Orders</a>
+                        <a class="nav-link"href="<?php echo base_url();?>allorders">View Orders</a>
                     </li>
                 </ul>
             </div>

@@ -142,18 +142,23 @@ public function delete($id)
 	{
         $quantity = $this->input->post('quantity');
         $itemId = $this->input->post('itemid');
-        $this->db->where('id', $itemid);
+        $this->db->where('id', $itemId);
         $query = $this->db->get('items');
         $item=$query->row();
         $unitPrice=$item->price;
-        $totalprice=$itemprice+$quantity;
+        $total=$unitPrice*$quantity;
         $status=0;
         $data = array('itemId' => $itemId,
                       'quantity'=>$quantity,
-                      'Subcategories'=>$Subcategories,
-                      'Subcategories'=>$Subcategories,
-                      'Subcategories'=>$Subcategories);
-        $this->load->view('admin/subcategories',$data);
+                      'unitPrice'=>$unitPrice,
+                      'total'=>$total,
+                      'status'=>$status);
+         $this->load->database();
+
+            $this->db->insert('allorders', $data);
+            $this->session->set_flashdata('success', 'Send Order Request');
+            redirect('allorders');
+
 
         
 
