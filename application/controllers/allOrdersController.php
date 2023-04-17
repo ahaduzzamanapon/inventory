@@ -16,9 +16,6 @@ class allOrdersController extends CI_Controller
         $this->load->helper('url');
     }
 
-// jrvn
-// jrvn
-// jrvn
 
 	
 	public function index()
