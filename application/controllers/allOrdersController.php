@@ -11,7 +11,7 @@ class allOrdersController extends CI_Controller
         $this->load->model('catmodel');
         $this->load->model('subModel');
         $this->load->model('Unit');
-        // $this->load->model('Unit');
+        $this->load->model('allOrders');
         $this->load->library('session');
         $this->load->helper('url');
     }
@@ -20,9 +20,10 @@ class allOrdersController extends CI_Controller
 	
 	public function index()
 	{
-        $this->load->view('admin/allOrders');
-        // $orders = $this->allOrders->showAllData();
-        // $this->load->view('admin/allOrders', compact('orders'));
+        // $this->load->view('admin/allOrders');
+        $orders = $this->allOrders->showAllData();
+        // dd($orders);
+        $this->load->view('admin/allOrders', compact('orders'));
 	}
     
 }

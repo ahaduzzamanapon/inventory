@@ -59,28 +59,32 @@
                 <?php foreach ($orders as $order): ?>
                     <tr>
                         <td>
-                            <?php echo $order->orderId; ?>
+                            <?php echo $order->id; ?>
                         </td>
                         <td>
-                            <?php echo $order->item; ?>
+                            <?php echo $order->itemname; ?>
                         </td>
                         <td>
-                            <?php echo $order->category; ?>
+                            <?php echo $order->catname; ?>
                         </td>
                         <td>
-                            <?php echo $order->subCategory; ?>
+                            <?php echo $order->subcname; ?>
                         </td>
                         <td>
                             <?php echo $order->quantity; ?>
                         </td>
                         <td>
-                            <?php echo $order->unitPrice; ?>
+                            <?php echo $order->price; ?>
                         </td>
                         <td>
-                            <?php echo $order->totalPrice; ?>
+                            <?php echo $order->total; ?>
                         </td>
                         <td>
-                            <?php echo $order->status; ?>
+                            <?php  if($order->status == 0) { echo 'Waiting for Approval'; }
+                                    else if($order->status == 1) { echo 'Approved'; }
+                                    else if($order->status == 2) { echo 'Rejected'; }
+                                    else if($order->status == 3) { echo 'Delivered'; }
+                            ?>
                         </td>
                     </tr>
                     <?php endforeach; ?>
