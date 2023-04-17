@@ -43,6 +43,9 @@
                         <li class="active">
                             <a href="<?php echo base_url(); ?>">Orders</a>
                         </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>requisition">Requisition</a>
+                        </li>
 
                     </ul>
                 </li>

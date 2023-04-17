@@ -38,7 +38,7 @@
                 </ul>
             </div>
         </nav>
-        <?php #dd($subCategoryData); ?>
+        
         
             <label for="inputItem"><b>All Orders</b></label>
             <table class="table table-hover col-md-9">
@@ -59,7 +59,7 @@
                 <?php foreach ($orders as $order): ?>
                     <tr>
                         <td>
-                            <?php echo $order->id; ?>
+                            <?php echo $order->orderId; ?>
                         </td>
                         <td>
                             <?php echo $order->itemname; ?>
@@ -91,9 +91,6 @@
                 </tbody>
 
             </table>
-
-
-        </form>
 
 <!-- main content end  -->
 
