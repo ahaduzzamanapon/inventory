@@ -138,6 +138,15 @@ public function delete($id)
         $this->load->view('admin/subcategories',$data);
 
 	}
+	public function orderreq()
+	{
+        $quantity = $this->input->post('quantity');
+        dd($quantity);
+
+
+        
+
+	}
 
 
     public function subCatStor(){

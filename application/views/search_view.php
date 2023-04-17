@@ -80,6 +80,8 @@
      <div class="col-md-6">
      <div class="container-fluid ">
         <div class="row">
+        <?php echo form_open(base_url('admin/orderreq')); ?>
+
 
         <table id="cart_table" class="table">
     <thead>
@@ -90,9 +92,13 @@
         </tr>
     </thead>
     <tbody>
+   
         <!-- Cart items will be added here -->
     </tbody>
+    
+
 </table>
+<?php echo form_close(); ?>
 
             </div>
           </div>
@@ -103,11 +109,13 @@
   </div>
  </div>
     
-     
+   
 
 
 	<script>
 		$(document).ready(function(){
+            var total = 0;
+            
 			$('#category').change(function(){
 				var cat_id = $(this).val();
 				if(cat_id != ''){
@@ -160,7 +168,6 @@
                                                 '<td>'+data[i].quantity+'</td>'+
                                                 '<td> <a data-custom-value="'+data[i].id+'" id="add" class="btn btn-primary">add</a>'
                                             
-                                            // +data[i].id+
                                             '</td>'+
                                                 '</tr>';
                                                 }
@@ -214,45 +221,47 @@
 
         $(document).on('click', '#add', function(){
             var quantity = parseInt($(this).siblings('.quantity').val());
-
-    var itemid = $(this).data("custom-value");
-    var quantity = 1; // Set the default quantity to 1
+             var itemid = $(this).data("custom-value");
+             var quantity = 1; // Set the default quantity to 1
 
     if(itemid != ''){
         $.ajax({
+            
             url:"<?php echo base_url('item/add_item_to_cart'); ?>",
             method:"POST",
             data:{itemid:itemid, quantity:quantity},
             dataType:"json",
             success:function(data){
                 var html = '';
-                var subtotal = 0;
                 if(data.length > 0){
                     for(var i=0; i<data.length; i++){
                         var itemSubtotal = parseFloat(data[i].price) * parseFloat(quantity);
-                        subtotal += itemSubtotal;
                         html += '<tr>'+
                                     '<td>'+data[i].itemname+'</td>'+
                                     '<td>'+data[i].price+'</td>'+
                                     '<td>'+
                                         '<div class="input-group">'+
                                             '<button class="btn btn-outline-secondary decrease-quantity" type="button">-</button>'+
-                                            '<input type="number" class="form-control quantity" value="'+quantity+'" readonly>'+
+                                            '<input name="quantity" type="number" class="quantity" value="'+quantity+'" readonly>'+
                                             '<button class="btn btn-outline-secondary increase-quantity" type="button">+</button>'+
                                         '</div>'+
                                     '</td>'+
                                     '<td>'+itemSubtotal+'</td>'+
-                                '</tr>';
+                                   
+                                '<tr>'+
+                                '<td>'+'<input type="hidden" name="itemid" class="" value="'+data[i].id+'" >'+'</td>'+
+                                '</tr>'+
+                                '<tr>'+
+                                '<td>'+'<input type="submit" class="btn btn-primary ">'+'</td>'+
+                                '</tr>'
+                                ;
                     }
-                    html += '<tr>'+
-                                '<td colspan="3" class="text-end fw-bold">Total:</td>'+
-                                '<td class="fw-bold">'+subtotal+'</td>'+
-                            '</tr>';
+
                 }
                 else{
                     html += '<tr><td colspan="4">No Items found</td></tr>';
                 }
-                $('#cart_table tbody').append(html); // Replace the cart table contents with the new HTML
+                $('#cart_table tbody').html(html); // Replace the cart table contents with the new HTML
             }
         });
     }
@@ -265,9 +274,13 @@ var quantity = parseInt(quantityInput.val());
     var quantity = parseInt(quantityInput.val()) + 1;
     var price = parseFloat($(this).closest('tr').find('td:nth-child(2)').text());
     var subtotal = price * quantity;
+   
+    
     quantityInput.val(quantity);
     $(this).closest('tr').find('td:nth-child(4)').text(subtotal);
-    updateTotals();
+  
+
+
 });
 
 $(document).on('click', '.decrease-quantity', function(){
@@ -276,11 +289,14 @@ $(document).on('click', '.decrease-quantity', function(){
     if(quantity >= 1){
         var price = parseFloat($(this).closest('tr').find('td:nth-child(2)').text());
         var subtotal = price * quantity;
+        
         quantityInput.val(quantity);
         $(this).closest('tr').find('td:nth-child(4)').text(subtotal);
-        updateTotals();
+        
     }
 });
+
+
 
 $(document).on('input', '.quantity', function(){
     var quantity = parseInt($(this).val());
@@ -291,23 +307,17 @@ $(document).on('input', '.quantity', function(){
         var price = parseFloat($(this).closest('tr').find('td:nth-child(2)').text());
         var subtotal = price * quantity;
         $(this).closest('tr').find('td:nth-child(4)').text(subtotal);
-        updateTotals();
+        
     }
 });
 
-function updateTotals(){
-    var subtotal = 0;
-    $('.cart-item').each(function(){
-        subtotal += itemSubtotal;
-});
-$('#cart_table tfoot td:nth-child(2)').text(subtotal);
-}
 
 
 
 
 
 	});
+    
 </script>
 </body>
 </html>
