@@ -40,7 +40,9 @@
                         <li>
                             <a href="<?php echo base_url(); ?>itemcontroller">Item</a>
                         </li>
-
+                        <li>
+                            <a href="<?php echo base_url(); ?>requisition">Requisition</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -119,7 +121,7 @@
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body">
-                            <?php echo form_open(base_url('unitController/unitStore')); ?>
+                            <?php echo form_open(base_url('unitController/update')); ?>                            
                             <div class="form-group">
                                 <label for="name">Unit Name</label>
                                 <?php if ($this->session->flashdata('unitValidation1')) { ?>

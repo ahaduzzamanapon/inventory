@@ -30,7 +30,8 @@ public function index(){
 
       }else{
         $userfname=$this->session->userdata('fname');	
-         $this->load->view('welcome',['firstname'=>$userfname]);
+        //  $this->load->view('welcome',['firstname'=>$userfname]);
+         redirect('item');
       }
 
     }

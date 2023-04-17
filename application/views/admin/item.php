@@ -48,6 +48,9 @@
                         <li class="active">
                             <a href="<?php echo base_url(); ?>itemcontroller">Item</a>
                         </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>requisition">Requisition</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -64,8 +67,7 @@
                         <i class="fas fa-align-left"></i>
                         <span>Menu</span>
                     </button>
-                    <a href="<?php echo site_url('Logout');?>" class="btn btn-success btn-sm btn-inline" style="color:#fff;">Logout</a>
-
+                    
                 </div>
             </nav>
 
@@ -108,7 +110,7 @@
                 <tbody>
                     <?php foreach ($items as $key => $item): ?>
                     <tr>
-                        <td><?php echo $key+1 ?></td>
+                        <td><?php echo $key ?></td>
                         <td>
 
                         <img src="<?php echo base_url('upload/' . $item->image); ?>" alt="My Image" height="40px" width="50px">
@@ -132,10 +134,7 @@
                         
                         <td>
                             <a class="btn btn-sm btn-success" href="<?php echo base_url('itemcontroller/edit/'. $item->id);?>" >
-                                Edit
-                            </a>
-                            <a class="btn btn-sm btn-danger" href="<?php echo base_url('itemcontroller/delete/'. $item->id);?>" >
-                                Delete
+                                edit
                             </a>
                             
                     </td>

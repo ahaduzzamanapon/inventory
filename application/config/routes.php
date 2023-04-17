@@ -55,3 +55,9 @@ $route['translate_uri_dashes'] = FALSE;
 
 //$route['test/tine/(:any)'] = 'Admin/test/$1';
 
+$route['order'] = 'orderController/index';
+
+$route['salesOrder'] = 'salesOrderController/index';
+// $route['salesOrder'] = 'salesOrderController/index';
+$route['allorders'] = 'allOrdersController/index';
+$route['requisition'] = 'requisitionController/index';

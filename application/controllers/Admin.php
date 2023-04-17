@@ -138,6 +138,34 @@ public function delete($id)
         $this->load->view('admin/subcategories',$data);
 
 	}
+	public function orderreq()
+	{
+        $quantity = $this->input->post('quantity');
+        $itemId = $this->input->post('itemid');
+        $this->db->where('id', $itemId);
+        $query = $this->db->get('items');
+        $item=$query->row();
+        $unitPrice=$item->price;
+        $total=$unitPrice*$quantity;
+        $status=0;
+        $data = array('itemId' => $itemId,
+                      'quantity'=>$quantity,
+                      'unitPrice'=>$unitPrice,
+                      'total'=>$total,
+                      'status'=>$status);
+         $this->load->database();
+
+            $this->db->insert('allorders', $data);
+            $this->session->set_flashdata('success', 'Order Requested Successfully. Please Wait For Confirmation.');
+            redirect('allorders');
+
+
+        
+
+
+        
+
+	}
 
 
     public function subCatStor(){
