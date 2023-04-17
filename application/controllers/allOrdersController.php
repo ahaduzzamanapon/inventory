@@ -22,8 +22,10 @@ class allOrdersController extends CI_Controller
 	{
         // $this->load->view('admin/allOrders');
         $orders = $this->allOrders->showAllData();
+        $flashmsg =$this->session->flashdata('success');
+        
         // dd($orders);
-        $this->load->view('admin/allOrders', compact('orders'));
+        $this->load->view('admin/allOrders', compact('orders','flashmsg'));
 	}
     
 }
