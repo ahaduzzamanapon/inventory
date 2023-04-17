@@ -156,7 +156,7 @@ public function delete($id)
          $this->load->database();
 
             $this->db->insert('allorders', $data);
-            $this->session->set_flashdata('success', 'Send Order Request');
+            $this->session->set_flashdata('success', 'Order Requested Successfully. Please Wait For Confirmation.');
             redirect('allorders');
 
 
