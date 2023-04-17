@@ -27,6 +27,12 @@ class allOrdersController extends CI_Controller
         // dd($orders);
         $this->load->view('admin/allOrders', compact('orders','flashmsg'));
 	}
+    public function delivered($id)
+    {
+        $this->allOrders->delivered($id);
+        $this->session->set_flashdata('success', 'Order Delivered Successfully.');
+        redirect('allOrdersController');
+    }
     
 }
     
