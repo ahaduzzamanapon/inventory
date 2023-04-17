@@ -21,7 +21,10 @@
                     <li class="nav-item">
                         <a class="nav-link"href="<?php echo base_url();?>allorders">View Orders</a>
                     </li>
+
                 </ul>
+                <a href="<?php echo site_url('Logout');?>" class="btn btn-success btn-sm btn-inline my-sm-0" style="color:#fff;">Logout</a>
+
             </div>
         </nav>
         <div class="container-fluid ">

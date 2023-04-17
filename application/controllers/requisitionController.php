@@ -20,9 +20,27 @@ class requisitionController extends CI_Controller
 	
 	public function index()
 	{
-        $this->load->view('admin/requisition');
+        $orders = $this->allOrders->showAllData();
+        // $this->session->set_flashdata('success', 'Order Requested Successfully. Please Wait For Confirmation.');
+        $flashmsg =$this->session->flashdata('success');
+        // var_dump($flashmsg);
+        // dd($orders);
+        // $this->load->view('admin/allOrders', compact('orders','flashmsg'));
+        $this->load->view('admin/requisition', compact('orders','flashmsg'));
 
 	}
+    public function approve($id)
+    {
+        $this->allOrders->approve($id);
+        $this->session->set_flashdata('success', 'Order Confirmed Successfully.');
+        redirect('requisitionController');
+    }
+    public function reject($id)
+    {
+        $this->allOrders->reject($id);
+        $this->session->set_flashdata('success', 'Order Rejected Successfully.');
+        redirect('requisitionController');
+    }
     
 }
     

@@ -87,7 +87,10 @@
                             </td>
                             <td>
                                 <?php  if($order->status == 0) { echo '<p class="text-info">Waiting for Approval</p>'; }
-                                        else if($order->status == 1) { echo '<p class="text-primary">Approved'; }
+                                        else if($order->status == 1) { 
+                                            echo '<p class="text-primary ">Approved'; 
+                                            echo '<a class="ml-3 btn btn-primary" href="'.base_url().'allOrdersController/delivered/'.$order->orderId.'">Make Deliver</a>';
+                                        }
                                         else if($order->status == 2) { echo '<p class="text-danger">Rejected'; }
                                         else if($order->status == 3) { echo '<p class="text-success">Delivered'; }
                                 ?>
@@ -119,7 +122,7 @@ $(document).ready(function () {
             });
         });
 
-        // setTimeout("location.reload(true);", 5000);
+        setTimeout("location.reload(true);", 5000);
 
 
 
