@@ -141,7 +141,21 @@ public function delete($id)
 	public function orderreq()
 	{
         $quantity = $this->input->post('quantity');
-        dd($quantity);
+        $itemId = $this->input->post('itemid');
+        $this->db->where('id', $itemid);
+        $query = $this->db->get('items');
+        $item=$query->row();
+        $unitPrice=$item->price;
+        $totalprice=$itemprice+$quantity;
+        $status=0;
+        $data = array('itemId' => $itemId,
+                      'quantity'=>$quantity,
+                      'Subcategories'=>$Subcategories,
+                      'Subcategories'=>$Subcategories,
+                      'Subcategories'=>$Subcategories);
+        $this->load->view('admin/subcategories',$data);
+
+        
 
 
         
