@@ -21,8 +21,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
-  <body>
-    <div id="content">
+  <body >
+    <div id="content" class="custom_content">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -38,60 +38,66 @@
                 </ul>
             </div>
         </nav>
-        <?php #dd($subCategoryData); ?>
-        
-            <label for="inputItem"><b>All Orders</b></label>
-            <table class="table table-hover col-md-9">
-                <thead>
-                    <tr>
-                        <th>Order ID</th>
-                        <th>Item</th>
-                        <th>Category</th>
-                        <th>Sub Category</th>
-                        <th>Quantity</th>
-                        <th>Unit Price</th>
-                        <th>Total Price</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
+        <div class="container-fluid">
+        <!-- Code for flash message -->
+            <?php if ($flashmsg) {?>
+                <div class="alert alert-success">
+                    <?php echo $flashmsg; ?>
+                </div>
+                <?php }?>
+            
+                <label for="inputItem"><b>All Orders</b></label>
+                <table class="table table-hover col-md-12">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Item</th>
+                            <th>Category</th>
+                            <th>Sub Category</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total Price</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
 
-                <tbody>
-                <?php foreach ($orders as $order): ?>
-                    <tr>
-                        <td>
-                            <?php echo $order->orderId; ?>
-                        </td>
-                        <td>
-                            <?php echo $order->itemname; ?>
-                        </td>
-                        <td>
-                            <?php echo $order->catname; ?>
-                        </td>
-                        <td>
-                            <?php echo $order->subcname; ?>
-                        </td>
-                        <td>
-                            <?php echo $order->quantity; ?>
-                        </td>
-                        <td>
-                            <?php echo $order->price; ?>
-                        </td>
-                        <td>
-                            <?php echo $order->total; ?>
-                        </td>
-                        <td>
-                            <?php  if($order->status == 0) { echo 'Waiting for Approval'; }
-                                    else if($order->status == 1) { echo 'Approved'; }
-                                    else if($order->status == 2) { echo 'Rejected'; }
-                                    else if($order->status == 3) { echo 'Delivered'; }
-                            ?>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
+                    <tbody>
+                    <?php foreach ($orders as $order): ?>
+                        <tr>
+                            <td>
+                                <?php echo $order->orderId; ?>
+                            </td>
+                            <td>
+                                <?php echo $order->itemname; ?>
+                            </td>
+                            <td>
+                                <?php echo $order->catname; ?>
+                            </td>
+                            <td>
+                                <?php echo $order->subcname; ?>
+                            </td>
+                            <td>
+                                <?php echo $order->quantity; ?>
+                            </td>
+                            <td>
+                                <?php echo $order->price; ?>
+                            </td>
+                            <td>
+                                <?php echo $order->total; ?>
+                            </td>
+                            <td>
+                                <?php  if($order->status == 0) { echo '<p class="text-info">Waiting for Approval</p>'; }
+                                        else if($order->status == 1) { echo '<p class="text-primary">Approved'; }
+                                        else if($order->status == 2) { echo '<p class="text-danger">Rejected'; }
+                                        else if($order->status == 3) { echo '<p class="text-success">Delivered'; }
+                                ?>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </tbody>
 
-            </table>
-
+                </table>
+        </div>
 <!-- main content end  -->
 
         
@@ -113,7 +119,7 @@ $(document).ready(function () {
             });
         });
 
-        // setTimeout("location.reload(true);", 2000);
+        // setTimeout("location.reload(true);", 5000);
 
 
 
