@@ -217,7 +217,7 @@
 
 				if(itemid != ''){
 					$.ajax({
-						url:"<?php echo base_url('item/add_item_to_cart'); ?>",
+						url:"<?php echo base_url('CardController/calculate/'); ?> +itemid+",
 						method:"POST",
 						data:{itemid:itemid},
 						dataType:"json",
@@ -245,6 +245,7 @@
 					});
 				}
 				else{
+                    $('#item_add_table tbody').html('');
 					
 				}
 			});
