@@ -20,47 +20,27 @@ class salesOrderController extends CI_Controller
 	
 	public function index()
 	{
-
-
-        
-                $this->db->select('items.id, items.itemname, categories.catname, subcategories.subcname, units.unitName, items.price, items.quantity, items.status, items.image');
-                $this->db->from('items');
-                $this->db->join('categories', 'categories.id = items.catid');
-                $this->db->join('subcategories', 'subcategories.sid = items.subid');
-                $this->db->join('units', 'units.unitid = items.unitid');
-                $query = $this->db->get();
-                $items = $query->result();
-
-
-
-                $data['categories'] = $this->db->get('categories')->result();
-                $units = $this->Unit->showAllData();
-                $data['units'] = $units;
-                $data['items'] = $items;
-                $data['validationerrorstor'] = $this->session->flashdata('validationerrorstor');
-                $data['imageerror'] = $this->session->flashdata('imageerror');
-                $data['success'] = $this->session->flashdata('success');
-                $data['error'] = $this->session->flashdata('error');
-       
-
-
-
-		$this->load->view('sales/salesOrder',$data);
-
-
+        $categoryData = $this->catmodel->get_categories();
+        $subCategoryData = $this->Sales->getAllSubCategories();
+        $unitData = $this->Unit->showAllData();
+        // dd($unitData);
+        $this->load->view('sales/salesOrder', compact('categoryData', 'subCategoryData', 'unitData'));
 	}
 
-    public function get_subcategories() {
+    public function get_subcategories()
+    {
         $categoryId = $this->input->post('category_id');
-        //  dd($categoryId);
         $subcategories = $this->db->get_where('subcategories', array('catname' => $categoryId))->result();
-        // dd($subcategories);
+        
         $html = '<option value="">Select Subcategory</option>';
-        foreach($subcategories as $subcategory) 
+        foreach($subcategories as $subcategory)
         {
             $html .= '<option value="'.$subcategory->sid.'">'.$subcategory->subcname.'</option>';
         }
         echo $html;
+        // if($this->input->post('category_id')) {
+        //     echo $this->Sales->fetch_subcategories($this->input->post('category_id'));
+        // }
     }
 }
-    ?>
+?>

@@ -23,7 +23,9 @@
             </div>
 
             <ul class="list-unstyled components">
-                <p>Dashboard</p>
+                <li>
+                    <a href="dashboard">Dashboard</a>
+                </li>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
                         class="dropdown-toggle">Setup</a>
@@ -40,11 +42,17 @@
                         <li>
                             <a href="<?php echo base_url(); ?>itemcontroller">Item</a>
                         </li>
+<<<<<<< HEAD
 
                         <li>
                             <a href="<?php echo base_url(); ?>OrderController">Order</a>
                         </li>
 
+=======
+                        <li>
+                            <a href="<?php echo base_url(); ?>requisition">Requisition</a>
+                        </li>
+>>>>>>> 6431f8e3d736d34a85ddc2ecc55a595662e1052f
                     </ul>
                 </li>
                 <li>

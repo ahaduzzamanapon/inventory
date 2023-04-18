@@ -59,4 +59,7 @@ $route['order'] = 'orderController/index';
 
 $route['salesOrder'] = 'salesOrderController/index';
 // $route['salesOrder'] = 'salesOrderController/index';
-$route['search'] = 'SearchController';
+$route['allorders'] = 'allOrdersController/index';
+$route['requisition'] = 'requisitionController/index';
+
+$route['dashboard'] = 'dashboardController/index';

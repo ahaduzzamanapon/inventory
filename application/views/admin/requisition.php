@@ -43,7 +43,7 @@
                         <li>
                             <a href="<?php echo base_url(); ?>admin/categories">Categories</a>
                         </li>
-                        <li class="active">
+                        <li>
                             <a href="<?php echo base_url(); ?>admin/subcategories">Sub-Categories</a>
                         </li>
                         <li>
@@ -52,15 +52,9 @@
                         <li>
                             <a href="<?php echo base_url(); ?>itemcontroller">Item</a>
                         </li>
-                        <li>
-<<<<<<< HEAD
-                            <a href="<?php echo base_url(); ?>OrderController">Order</a>
-                        </li>
-                       
-=======
+                        <li class="active">
                             <a href="<?php echo base_url(); ?>requisition">Requisition</a>
                         </li>
->>>>>>> 6431f8e3d736d34a85ddc2ecc55a595662e1052f
                     </ul>
                 </li>
                 <li>
@@ -84,34 +78,87 @@
                     </button>
                     <a href="<?php echo site_url('Logout');?>" class="btn btn-success btn-sm btn-inline" style="color:#fff;">Logout</a>
 
+                   
+
                     
                 </div>
-                            </nav>
-                <!-- main content start  -->
-                <?php echo form_open(base_url('admin/upDated')); ?>
+            </nav>
+<!-- main content start  -->
 
-                 
-                <div class="form-group">
-                <label for="sel1">Select list:</label>
-                <select class="form-control" id="sel1" name="catId">
-                    <option class=" bg-info text-white" value="<?php echo $catName->id;?>" disabled><?php echo $catName->catname;?></option>
 
-                    <?php foreach($categories as $categories): ?>
-                        <option value="<?php echo $categories->id;?>"><?php echo $categories->catname;?></option>
+   
+<label for="inputItem"><b>All Orders</b></label>
+                <table class="table table-hover col-md-12">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Item</th>
+                            <th>Category</th>
+                            <th>Sub Category</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total Price</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    <?php foreach ($orders as $order): ?>
+                        <tr>
+                            <td>
+                                <?php echo $order->orderId; ?>
+                            </td>
+                            <td>
+                                <?php echo $order->itemname; ?>
+                            </td>
+                            <td>
+                                <?php echo $order->catname; ?>
+                            </td>
+                            <td>
+                                <?php echo $order->subcname; ?>
+                            </td>
+                            <td>
+                                <?php echo $order->quantity; ?>
+                            </td>
+                            <td>
+                                <?php echo $order->price; ?>
+                            </td>
+                            <td>
+                                <?php echo $order->total; ?>
+                            </td>
+                            <td>
+                                <?php  if($order->status == 0) {?>
+                                    <a href="<?php echo base_url(); ?>requisitionController/approve/<?php echo $order->orderId; ?>" class="btn btn-success btn-sm btn-inline" style="color:#fff;">Accept</a>
+                                    <a href="<?php echo base_url(); ?>requisitionController/reject/<?php echo $order->orderId; ?>" class="btn btn-danger btn-sm btn-inline" style="color:#fff;">Reject</a>
+                                    
+                                    <?php }
+                                    else if ($order->status == 1) {?>
+                                        <p class="center text-success">Approved</p>
+                                        <?php }
+                                     else if ($order->status == 2) {?>
+                                        <p class="center text-danger">Rejected</p>
+                                        <?php }    
+                                    else if ($order->status == 3) {?>
+                                        <p class="center text-success">Delivered</p>
+                                    <?php }?>
+
+                            </td>
+                        </tr>
                         <?php endforeach; ?>
-                </select>
-               
-                 
-                <input type="text" class="form-control mt-2" value="<?php echo ($item->subcname);?>" name="subname" required>
-                 
-                <input type="hidden" class="form-control mt-2" value="<?php echo ($item->sid);?>" name="subId">
-                <input type="submit" class="form-control mt-2 btn btn-sm btn-primary" name="Submit">
+                    </tbody>
+
+                </table>
 
 
-                <?php echo form_close(); ?>
 
 
-       
+
+
+
+<!-- main content end  -->
+
+
+
             </div>
     </div>
 
@@ -130,8 +177,7 @@ $(document).ready(function () {
                 $('#sidebar').toggleClass('active');
             });
         });
-
-
+        setTimeout("location.reload(true);", 5000);
 
 </script>
 

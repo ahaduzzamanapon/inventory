@@ -11,8 +11,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/style.css">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.slim.min.js"></script>
@@ -30,10 +29,11 @@
             </div>
 
             <ul class="list-unstyled components">
-                <p>Dashboard</p>
+                <li>
+                <a href="<?php echo base_url('dashboardController/index'); ?>">Dashboard</a>
+                </li>
                 <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"
-                        class="dropdown-toggle">Setup</a>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Setup</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li class="active">
                             <a href="<?php echo base_url(); ?>admin/categories">Categories</a>
@@ -48,7 +48,11 @@
                             <a href="<?php echo base_url(); ?>itemcontroller">Item</a>
                         </li>
                         <li>
+<<<<<<< HEAD
                             <a href="<?php echo base_url(); ?>OrderController">Order</a>
+=======
+                            <a href="<?php echo base_url(); ?>requisition">Requisition</a>
+>>>>>>> 6431f8e3d736d34a85ddc2ecc55a595662e1052f
                         </li>
                     </ul>
                 </li>
@@ -78,9 +82,9 @@
                 <?php echo $this->session->flashdata('success'); ?>
             </div>
             <?php }?>
-           
 
-          
+
+
 
 
             <?php if ($this->session->flashdata('error')) {?>
@@ -93,12 +97,12 @@
             <div class="alert alert-success">
                 <?php $sid=$this->session->flashdata('data'); ?>
                 <?php echo form_open(base_url('admin/forcedlt')); ?>
-  <input type="hidden" name="sid[]" value="<?php echo implode(",", $sid); ?>">
-  <p>Do you want delete these subcategory click force to delete </p>
-  <button   onclick="return confirm('Are you sure you want to delete these Subcategory?')" class="btn btn-danger" type="submit">Force to delete</button>
-  <?php echo form_close(); ?>
+                <input type="hidden" name="sid[]" value="<?php echo implode(",", $sid); ?>">
+                <p>Do you want delete these subcategory click force to delete </p>
+                <button onclick="return confirm('Are you sure you want to delete these Subcategory?')" class="btn btn-danger" type="submit">Force to delete</button>
+                <?php echo form_close(); ?>
 
-</form>
+                </form>
 
             </div>
             <?php }?>
@@ -110,22 +114,19 @@
 
             <table class="table table-hover">
                 <thead>
-                    
-                        <tr>
-                            <th>Category Name</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
+
+                    <tr>
+                        <th>Category Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
                 <tbody>
                     <?php foreach ($categories as $cat): ?>
                     <tr>
                         <td><?php echo $cat->catname; ?></td>
                         <td>
-                            <a href="#" class="btn btn-primary" id="editUserModalLink" data-toggle="modal"
-                                data-target="#editUserModal" data-id="<?php echo $cat->id; ?>"
-                                data-catname="<?php echo $cat->catname; ?>">Edit</a>
-                            <a href="<?php echo base_url('admin/delete/' . $cat->id); ?>" class="btn btn-danger btn-sm"
-                                onclick="return confirm('Are you sure you want to delete this user?');">
+                            <a href="#" class="btn btn-primary" id="editUserModalLink" data-toggle="modal" data-target="#editUserModal" data-id="<?php echo $cat->id; ?>" data-catname="<?php echo $cat->catname; ?>">Edit</a>
+                            <a href="<?php echo base_url('admin/delete/' . $cat->id); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this user?');">
                                 Delete
                             </a>
                         </td>
@@ -160,8 +161,7 @@
                 </div>
 
                 <!-- Edit Category Modal -->
-                <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog"
-                    aria-labelledby="editUserModalLabel" aria-hidden="true">
+                <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -205,34 +205,31 @@
 
                 <!-- jQuery code for setting the input field values in the modal -->
                 <script>
-                $(document).on("click", "#editUserModalLink", function() {
-                    var id = $(this).data("id");
-                    var name = $(this).data("catname");
+                    $(document).on("click", "#editUserModalLink", function() {
+                        var id = $(this).data("id");
+                        var name = $(this).data("catname");
 
-                    $("#editUserModal #id").val(id);
-                    $("#editUserModal #name").val(name);
-                });
+                        $("#editUserModal #id").val(id);
+                        $("#editUserModal #name").val(name);
+                    });
                 </script>
                 <!-- main content end  -->
         </div>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
     </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <script>
-    $(document).ready(function() {
-        $('#sidebarCollapse').on('click', function() {
-            $('#sidebar').toggleClass('active');
+        $(document).ready(function() {
+            $('#sidebarCollapse').on('click', function() {
+                $('#sidebar').toggleClass('active');
+            });
         });
-    });
     </script>
 </body>
 

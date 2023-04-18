@@ -6,6 +6,12 @@
 body {
 	font-family: "Poppins", sans-serif;
 	background: #fafafa;
+	margin:0 !important;
+	padding:0 !important;
+}
+.custom_content{
+	margin:0 !important;
+	padding:0 !important;
 }
 
 p {
