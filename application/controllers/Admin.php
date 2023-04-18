@@ -154,10 +154,16 @@ class Admin extends CI_Controller
         $this->db->where("id", $itemId);
         $query = $this->db->get("items");
         $item = $query->row();
+
         $unitPrice = $item->price;
         $total = $unitPrice * $quantity;
         $status = 0;
-        $data = [
+        $itemquantity = $item->quantity;
+        $presentquantity=($itemquantity-$quantity);
+        $data2 = [
+            "quantity" => $presentquantity];
+
+        $data1 = [
             "itemId" => $itemId,
             "quantity" => $quantity,
             "unitPrice" => $unitPrice,
@@ -166,7 +172,13 @@ class Admin extends CI_Controller
         ];
         $this->load->database();
 
-        $this->db->insert("allorders", $data);
+        $this->db->insert("allorders", $data1);
+        
+        $this->db->select('quantity');
+        $this->db->where('id', $itemId);
+        $this->db->update("items", $data2);
+
+
         $this->session->set_flashdata(
             "success",
             "Order Requested Successfully. Please Wait For Confirmation.",

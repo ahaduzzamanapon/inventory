@@ -240,6 +240,10 @@
                         var html = '';
                         if (data.length > 0) {
                             for (var i = 0; i < data.length; i++) {
+                                if (data[i].quantity>0){
+                                    
+                               
+
                                 var itemquantity = (data[i].quantity);
                                 update(itemquantity);
                                 var itemSubtotal = parseFloat(data[i].price) * parseFloat(quantity);
@@ -261,7 +265,10 @@
                                     '<tr>' +
                                     '<td>' + '<input type="submit" class="btn btn-primary ">' + '</td>' +
                                     '</tr>';
-                            }
+                            }else {
+                            html += '<tr><td colspan="4">No Items in store</td></tr>';
+                        }
+                         }
 
                         } else {
                             html += '<tr><td colspan="4">No Items found</td></tr>';

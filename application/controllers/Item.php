@@ -50,17 +50,19 @@ class Item extends CI_Controller
     }
 
     public function get_items()
-    {
-        // Get items for selected subcategory
-        $this->db->select("*");
-        $this->db->from("items");
-        $this->db->where("subid", $this->input->post("subid"));
-        $this->db->where("status !=", 0);
-        $query = $this->db->get();
-        $items = $query->result_array();
+{
+    // Get items for selected subcategory
+    $this->db->select("*");
+    $this->db->from("items");
+    $this->db->where("subid", $this->input->post("subid"));
+    $this->db->where("status !=", 0);
+    $this->db->where("quantity >=", 1); // Exclude items with quantity less than 1
+    $query = $this->db->get();
+    $items = $query->result_array();
 
-        echo json_encode($items);
-    }
+    echo json_encode($items);
+}
+
 
     public function search_items()
     {
@@ -68,7 +70,9 @@ class Item extends CI_Controller
         $this->db->select("*");
         $this->db->from("items");
         $this->db->like("itemname", $this->input->post("search_text"));
-        $this->db->where("status !=", 0);
+        $this->db->where("status !=", 0);   
+		$this->db->where("quantity >=", 1); // Exclude items with quantity less than 1
+
         $query = $this->db->get();
         $items = $query->result_array();
 
