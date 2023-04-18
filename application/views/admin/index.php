@@ -34,7 +34,9 @@
             </div>
 
             <ul class="list-unstyled components">
-                <p>Dashboard</p>
+                <li>
+                    <a href="<?php echo base_url(); ?>">Dashboard</a>
+                </li>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Setup</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -94,7 +96,8 @@
             <h1 class="text-center bg-info">Welcome Back to Admin Dashboard</h1>
             <form>
             <div class="form-group"style="font-size:40px; color:#000;" align="center">
-              I am Mr  <?php echo $firstname?> 
+            <?php if(isset($firstname)){ ?>  
+            I am Mr  <?php echo $firstname; }?> 
             </div>
       
             </form>
