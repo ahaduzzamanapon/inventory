@@ -35,7 +35,7 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="<?php echo base_url(); ?>">Dashboard</a>
+                    <a href="dashboard">Dashboard</a>
                 </li>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Setup</a>
@@ -47,7 +47,7 @@
                             <a href="<?php echo base_url(); ?>admin/subcategories">Sub-Categories</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>admin/unit">Unit</a>
+                            <a href="<?php echo base_url(); ?>unitController">Unit</a>
                         </li>
                         <li>
                             <a href="<?php echo base_url(); ?>itemcontroller">Item</a>
