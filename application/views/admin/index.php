@@ -34,7 +34,9 @@
             </div>
 
             <ul class="list-unstyled components">
-                <p>Dashboard</p>
+                <li>
+                    <a href="dashboard">Dashboard</a>
+                </li>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Setup</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -45,7 +47,7 @@
                             <a href="<?php echo base_url(); ?>admin/subcategories">Sub-Categories</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>admin/unit">Unit</a>
+                            <a href="<?php echo base_url(); ?>unitController">Unit</a>
                         </li>
                         <li>
                             <a href="<?php echo base_url(); ?>itemcontroller">Item</a>
@@ -90,15 +92,15 @@
 
 
 
-                <div class="signup-form">
-                    <h1 class="text-center bg-info">Welcome Back to Admin Dashboard</h1>
-                    <form>
-                        <div class="form-group" style="font-size:40px; color:#000;" align="center">
-                            I am Mr <?php echo $firstname?>
-                        </div>
-
-                    </form>
-                </div>
+            <div class="signup-form">
+            <h1 class="text-center bg-info">Welcome Back to Admin Dashboard</h1>
+            <form>
+            <div class="form-group"style="font-size:40px; color:#000;" align="center">
+              I am Mr  <?php echo $firstname?> 
+            </div>
+      
+            </form>
+           </div>
 
 
 
