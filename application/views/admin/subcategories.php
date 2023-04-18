@@ -37,7 +37,7 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="dashboard">Dashboard</a>
+                    <a href="<?php echo base_url(); ?>dashboardController">Dashboard</a>
                 </li>
                 <li class="active">
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false"

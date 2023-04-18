@@ -34,10 +34,10 @@
             </div>
 
             <ul class="list-unstyled components">
-                <li>
+                <li class="active">
                     <a href="dashboard">Dashboard</a>
                 </li>
-                <li class="active">
+                <li>
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Setup</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>

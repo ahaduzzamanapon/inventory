@@ -18,12 +18,16 @@ class allOrders extends CI_Model {
         $this->db->set('status', 2);
         $this->db->where('orderId', $id);
         $this->db->update('allorders');
+        $itemId = $this->db->select('itemId')->from('allorders')->where('orderId', $id)->get()->result();
+        $quantity = $this->db->select('quantity')->from('allorders')->where('orderId', $id)->get()->result();
+        self::updateQuantity($itemId, $quantity);
     }
     public function approve($id)
     {
         $this->db->set('status', 1);
         $this->db->where('orderId', $id);
         $this->db->update('allorders');
+
     }
     public function delivered($id)
     {
@@ -31,9 +35,9 @@ class allOrders extends CI_Model {
         // $this->db->set('quantity', $quantity);
         $this->db->where('orderId', $id);
         $this->db->update('allorders');
-        $itemId = $this->db->select('itemId')->from('allorders')->where('orderId', $id)->get()->result();
-        $quantity = $this->db->select('quantity')->from('allorders')->where('orderId', $id)->get()->result();
-        self::updateQuantity($itemId, $quantity);
+        // $itemId = $this->db->select('itemId')->from('allorders')->where('orderId', $id)->get()->result();
+        // $quantity = $this->db->select('quantity')->from('allorders')->where('orderId', $id)->get()->result();
+        // self::updateQuantity($itemId, $quantity);
 
     }
     public function updateQuantity($itemId, $quantity){
@@ -46,8 +50,8 @@ class allOrders extends CI_Model {
         $this->db->where('id', $itemId[0]->itemId);
         $result = $this->db->get()->result();
        // dd($result[0]->quantity);
-        //dd($result);
-        $this->db->set('quantity', $result[0]->quantity-$quantity[0]->quantity);
+        // dd($result);
+        $this->db->set('quantity', $result[0]->quantity+$quantity[0]->quantity);
         $this->db->where('id', $itemId[0]->itemId);
         $this->db->update('items');
     }
