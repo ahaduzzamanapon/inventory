@@ -52,17 +52,7 @@
                         <li>
                             <a href="<?php echo base_url(); ?>itemcontroller">Item</a>
                         </li>
-<<<<<<< HEAD
-
-                        <li>
-                            <a href="<?php echo base_url(); ?>OrderController">Order</a>
-                        </li>
                        
-=======
-                        <li>
-                            <a href="<?php echo base_url(); ?>requisition">Requisition</a>
-                        </li>
->>>>>>> 6431f8e3d736d34a85ddc2ecc55a595662e1052f
                     </ul>
                 </li>
                 <li>
@@ -100,15 +90,15 @@
 
 
 
-            <div class="signup-form">
-            <h1 class="text-center bg-info">Welcome Back to Admin Dashboard</h1>
-            <form>
-            <div class="form-group"style="font-size:40px; color:#000;" align="center">
-              I am Mr  <?php echo $firstname?> 
-            </div>
-      
-            </form>
-           </div>
+                <div class="signup-form">
+                    <h1 class="text-center bg-info">Welcome Back to Admin Dashboard</h1>
+                    <form>
+                        <div class="form-group" style="font-size:40px; color:#000;" align="center">
+                            I am Mr <?php echo $firstname?>
+                        </div>
+
+                    </form>
+                </div>
 
 
 

@@ -150,145 +150,194 @@ g<!DOCTYPE html>
             }
         });
 
-			$('#subcategory').change(function(){
-				var sub_id = $(this).val();
-				if(sub_id != ''){
-					$.ajax({
-						url:"<?php echo base_url('item/get_items'); ?>",
-						method:"POST",
-						data:{subid:sub_id},
-						dataType:"json",
-						success:function(data){
-							var html = '';
-							if(data.length > 0){
-								for(var i=0; i<data.length; i++){
-									html += '<tr>'+
-												'<td>'+data[i].itemname+'</td>'+
-												
-												'<td>'+data[i].price+'</td>'+
-                                                '<td>'+data[i].quantity+'</td>'+
-                                                '<td> <a data-custom-value="'+data[i].id+'" id="add" class="btn btn-primary">add</a>'
-                                            
-                                            // +data[i].id+
-                                            '</td>'+
-                                                '</tr>';
-                                                }
-                                                }
-                                                else{
-                                                html += '<tr><td colspan="5">No Items found</td></tr>';
-                                                }
-                                                $('#item_table tbody').html(html);
-                  }
-                 });
-                 }
-                else{
-                $('#item_table tbody').html('');
-               }
-             });
-             $('#search').on('input', function(){
-			var search_text = $(this).val();
-			if(search_text != ''){
-				$.ajax({
-					url:"<?php echo base_url('item/search_items'); ?>",
-					method:"POST",
-					data:{search_text:search_text},
-					dataType:"json",
-					success:function(data){
-						var html = '';
-						if(data.length > 0){
-							for(var i=0; i<data.length; i++){
-								html += '<tr>'+
-											'<td>'+data[i].itemname+'</td>'+
-											
-											'<td>'+data[i].price+'</td>'+
-											'<td>'+data[i].quantity+'</td>'+
-                                            '<td> <button data-custom-value="'+data[i].id+'" id="add" class="btn btn-primary">add</button>'
-                                            
-                                            // +data[i].id+
-                                            '</td>'+
-										'</tr>';
-							}
-						}
-						else{
-							html += '<tr><td colspan="5">No Items found</td></tr>';
-						}
-						$('#item_table tbody').html(html);
-					}
-				});
-			}
-			else{
-				$('#item_table tbody').html('');
-			}
-		});
+        $('#subcategory').change(function() {
+            var sub_id = $(this).val();
+            if (sub_id != '') {
+                $.ajax({
+                    url: "<?php echo base_url('item/get_items'); ?>",
+                    method: "POST",
+                    data: {
+                        subid: sub_id
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        var html = '';
+                        if (data.length > 0) {
+                            for (var i = 0; i < data.length; i++) {
+                                html += '<tr>' +
+                                    '<td>' + data[i].itemname + '</td>' +
 
-       $(document).on('click', '#add', function(){
-    var itemid = $(this).data("custom-value");
-    var quantity = 1; // Set the default quantity to 1
+                                    '<td>' + data[i].price + '</td>' +
+                                    '<td>' + data[i].quantity + '</td>' +
+                                    '<td> <a data-custom-value="' + data[i].id + '" id="add" class="btn btn-primary">add</a>'
 
-    if(itemid != ''){
-        $.ajax({
-            url:"<?php echo base_url('item/add_item_to_cart'); ?>",
-            method:"POST",
-            data:{itemid:itemid, quantity:quantity},
-            dataType:"json",
-            success:function(data){
-                var html = '';
-                var subtotal = 0;
-                if(data.length > 0){
-                    for(var i=0; i<data.length; i++){
-                        var itemSubtotal = parseFloat(data[i].price) * parseFloat(data[i].quantity);
-                        subtotal += itemSubtotal;
-                        html += '<tr>'+
-                                    '<td>'+data[i].itemname+'</td>'+
-                                    '<td>'+data[i].price+'</td>'+
-                                    '<td>'+
-                                        '<div class="input-group">'+
-                                            '<button class="btn btn-outline-secondary decrease-quantity" type="button">-</button>'+
-                                            '<input type="number" class="form-control quantity" value="'+quantity+'" readonly>'+
-                                            '<button class="btn btn-outline-secondary increase-quantity" type="button">+</button>'+
-                                        '</div>'+
-                                    '</td>'+
-                                    '<td>'+itemSubtotal.toFixed(2)+'</td>'+
+                                '</td>' +
                                 '</tr>';
+                            }
+                        } else {
+                            html += '<tr><td colspan="5">No Items found</td></tr>';
+                        }
+                        $('#item_table tbody').html(html);
                     }
-                    html += '<tr>'+
-                                '<td colspan="3" class="text-end fw-bold">Total:</td>'+
-                                '<td class="fw-bold">'+subtotal.toFixed(2)+'</td>'+
-                            '</tr>';
-                }
-                else{
-                    html += '<tr><td colspan="4">No Items found</td></tr>';
-                }
-                $('#cart_table tbody').html(html); // Replace the cart table contents with the new HTML
+                });
+            } else {
+                $('#item_table tbody').html('');
             }
         });
-    }
-    else{
-        
-    }
-});
+        $('#search').on('input', function() {
+            var search_text = $(this).val();
+            if (search_text != '') {
+                $.ajax({
+                    url: "<?php echo base_url('item/search_items'); ?>",
+                    method: "POST",
+                    data: {
+                        search_text: search_text
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        var html = '';
+                        if (data.length > 0) {
+                            for (var i = 0; i < data.length; i++) {
+                                html += '<tr>' +
+                                    '<td>' + data[i].itemname + '</td>' +
 
-$(document).on('click', '.increase-quantity', function(){
-    var quantityInput = $(this).siblings('.quantity');
-    var quantity = parseInt(quantityInput.val()) + 1;
-    quantityInput.val(quantity);
-});
+                                    '<td>' + data[i].price + '</td>' +
+                                    '<td>' + data[i].quantity + '</td>' +
+                                    '<td> <button data-custom-value="' + data[i].id + '" id="add" class="btn btn-primary">add</button>'
 
-$(document).on('click', '.decrease-quantity', function(){
-    var quantityInput = $(this).siblings('.quantity');
-    var quantity = parseInt(quantityInput.val()) - 1;
-    if(quantity >= 1){
-        quantityInput.val(quantity);
-    }
-});
+                                // +data[i].id+
+                                '</td>' +
+                                '</tr>';
+                            }
+                        } else {
+                            html += '<tr><td colspan="5">No Items found</td></tr>';
+                        }
+                        $('#item_table tbody').html(html);
+                    }
+                });
+            } else {
+                $('#item_table tbody').html('');
+            }
+        });
+        var itemquantity;
 
-$(document).on('input', '.quantity', function(){
-    var quantity = parseInt($(this).val());
-    if(isNaN(quantity) || quantity < 1){
-        $(this).val(1);
-    }
-});
+        $(document).on('click', '#add', function() {
+            var quantity = parseInt($(this).siblings('.quantity').val());
+            var itemid = $(this).data("custom-value");
+            var quantity = 1; // Set the default quantity to 1
 
+            if (itemid != '') {
+                $.ajax({
+
+                    url: "<?php echo base_url('item/add_item_to_cart'); ?>",
+                    method: "POST",
+                    data: {
+                        itemid: itemid,
+                        quantity: quantity
+                    },
+                    dataType: "json",
+                    success: function(data) {
+                        var html = '';
+                        if (data.length > 0) {
+                            for (var i = 0; i < data.length; i++) {
+                                if (data[i].quantity>0){
+                                    
+                               
+
+                                var itemquantity = (data[i].quantity);
+                                update(itemquantity);
+                                var itemSubtotal = parseFloat(data[i].price) * parseFloat(quantity);
+                                html += '<tr>' +
+                                    '<td>' + data[i].itemname + '</td>' +
+                                    '<td>' + data[i].price + '</td>' +
+                                    '<td>' +
+                                    '<div class="input-group">' +
+                                    '<button class="btn btn-outline-secondary decrease-quantity" type="button">-</button>' +
+                                    '<input name="quantity" type="number" class="quantity" value="' + quantity + '" readonly>' +
+                                    '<button class="btn btn-outline-secondary increase-quantity" type="button">+</button>' +
+                                    '</div>' +
+                                    '</td>' +
+                                    '<td>' + itemSubtotal + '</td>' +
+
+                                    '<tr>' +
+                                    '<td>' + '<input type="hidden" name="itemid" class="" value="' + data[i].id + '" >' + '</td>' +
+                                    '</tr>' +
+                                    '<tr>' +
+                                    '<td>' + '<input type="submit" class="btn btn-primary ">' + '</td>' +
+                                    '</tr>';
+                            }else {
+                            html += '<tr><td colspan="4">No Items in store</td></tr>';
+                        }
+                         }
+
+                        } else {
+                            html += '<tr><td colspan="4">No Items found</td></tr>';
+                        }
+                        $('#cart_table tbody').html(html); // Replace the cart table contents with the new HTML
+                    }
+                });
+            }
+        });
+
+
+
+
+        var itemQuantityf
+
+        function update(itemquantity) {
+            itemQuantityf = itemquantity
+
+        }
+
+        $(document).on('click', '.increase-quantity', function() {
+            var quantityInput = $(this).siblings('.quantity');
+            var quantity = parseInt(quantityInput.val()) + 1;
+            var itemQuantity = parseInt(quantityInput.attr('max')); // assuming the maximum quantity is set as a 'max' attribute of the input element
+            var price = parseFloat($(this).closest('tr').find('td:nth-child(2)').text());
+            var subtotal = price * quantity;
+
+
+
+            if (quantity <= itemQuantityf) {
+                quantityInput.val(quantity);
+                $(this).closest('tr').find('td:nth-child(4)').text(subtotal);
+            } else {
+                alert('Sorry, there are only ' + itemQuantityf + ' items available.');
+                // or you can prevent the quantity from being updated, e.g.:
+                // quantityInput.val(itemQuantity);
+                // $(this).closest('tr').find('td:nth-child(4)').text(price * itemQuantity);
+            }
+        });
+
+
+
+
+        $(document).on('click', '.decrease-quantity', function() {
+            var quantityInput = $(this).siblings('.quantity');
+            var quantity = parseInt(quantityInput.val()) - 1;
+            if (quantity >= 1) {
+                var price = parseFloat($(this).closest('tr').find('td:nth-child(2)').text());
+                var subtotal = price * quantity;
+
+                quantityInput.val(quantity);
+                $(this).closest('tr').find('td:nth-child(4)').text(subtotal);
+
+            }
+        });
+
+
+
+        $(document).on('input', '.quantity', function() {
+            var quantity = parseInt($(this).val());
+            if (isNaN(quantity) || quantity < 1) {
+                $(this).val(1);
+            } else {
+                var price = parseFloat($(this).closest('tr').find('td:nth-child(2)').text());
+                var subtotal = price * quantity;
+                $(this).closest('tr').find('td:nth-child(4)').text(subtotal);
+
+            }
+        });
 
 
 

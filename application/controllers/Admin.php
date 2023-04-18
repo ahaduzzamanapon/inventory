@@ -141,53 +141,25 @@ class Admin extends CI_Controller
     {
         $categories = $this->catmodel->get_categories();
         $Subcategories = $this->subModel->get_categories();
-        $data = [
-            "categories" => $categories,
-            "Subcategories" => $Subcategories,
-        ];
-        $this->load->view("admin/subcategories", $data);
-    }
-    public function orderreq()
-    {
-        $quantity = $this->input->post("quantity");
-        $itemId = $this->input->post("itemid");
-        $this->db->where("id", $itemId);
-        $query = $this->db->get("items");
-        $item = $query->row();
-        $unitPrice = $item->price;
-        $total = $unitPrice * $quantity;
-        $status = 0;
-        $data = [
-            "itemId" => $itemId,
-            "quantity" => $quantity,
-            "unitPrice" => $unitPrice,
-            "total" => $total,
-            "status" => $status,
-        ];
-        $this->load->database();
+		$data = array('categories' => $categories,'Subcategories'=>$Subcategories);
+        $this->load->view('admin/subcategories',$data);
 
-        $this->db->insert("allorders", $data);
-        $this->session->set_flashdata(
-            "success",
-            "Order Requested Successfully. Please Wait For Confirmation.",
-        );
-        redirect("allorders");
-    }
+	}
 
-    public function subCatStor()
-    {
-        $this->load->helper("url");
-        $this->load->helper("form");
-        $this->load->library("form_validation");
-        $this->form_validation->set_rules(
-            "subCat",
-            " SubCategory Name",
-            "required|max_length[12]|is_unique[Subcategories.subcname]",
-        );
 
-        if ($this->form_validation->run() == false) {
-            $this->session->set_flashdata("validation1", validation_errors());
-            $this->load->library("user_agent");
+    public function subCatStor(){
+
+        $this->load->helper('url');
+        $this->load->helper('form');
+        $this->load->library('form_validation');
+		$this->form_validation->set_rules('subCat', ' SubCategory Name', 'required|max_length[12]|is_unique[Subcategories.subcname]');
+       
+
+
+        if ($this->form_validation->run() == FALSE) {
+			$this->session->set_flashdata('validation1', validation_errors());
+			$this->load->library('user_agent');
+
 
             // Redirect the user to the previous page
             redirect($this->agent->referrer());

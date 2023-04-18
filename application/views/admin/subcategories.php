@@ -55,15 +55,7 @@
                         <li>
                             <a href="<?php echo base_url(); ?>itemcontroller">Item</a>
                         </li>
-                        <li>
-<<<<<<< HEAD
-                            <a href="<?php echo base_url(); ?>OrderController">Order</a>
-                        </li>
 
-=======
-                            <a href="<?php echo base_url(); ?>requisition">Requisition</a>
-                        </li>
->>>>>>> 6431f8e3d736d34a85ddc2ecc55a595662e1052f
                     </ul>
                 </li>
                 <li>

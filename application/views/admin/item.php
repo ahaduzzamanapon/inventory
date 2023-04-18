@@ -48,15 +48,6 @@
                         <li class="active">
                             <a href="<?php echo base_url(); ?>itemcontroller">Item</a>
                         </li>
-<<<<<<< HEAD
-
-                        <li>
-                            <a href="<?php echo base_url(); ?>OrderController">Order</a>
-=======
-                        <li>
-                            <a href="<?php echo base_url(); ?>requisition">Requisition</a>
->>>>>>> 6431f8e3d736d34a85ddc2ecc55a595662e1052f
-                        </li>
                     </ul>
                 </li>
                 <li>
