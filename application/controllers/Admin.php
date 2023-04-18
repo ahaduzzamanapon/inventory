@@ -120,7 +120,7 @@ class Admin extends CI_Controller
             // Redirect back to the user list page
             $this->session->set_flashdata(
                 "success",
-                "Record delete  successfully",
+                "Record delete successfully",
             );
             $this->load->library("user_agent");
             // Redirect the user to the previous page
@@ -171,14 +171,10 @@ class Admin extends CI_Controller
             "status" => $status,
         ];
         $this->load->database();
-
         $this->db->insert("allorders", $data1);
-        
         $this->db->select('quantity');
         $this->db->where('id', $itemId);
         $this->db->update("items", $data2);
-
-
         $this->session->set_flashdata(
             "success",
             "Order Requested Successfully. Please Wait For Confirmation.",
