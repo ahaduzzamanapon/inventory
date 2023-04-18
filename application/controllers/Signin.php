@@ -28,10 +28,10 @@ $this->session->set_userdata('fname',$validate->FirstName);
 $this->session->set_userdata('type',$validate->userType);
 
 redirect('welcome1');
-} else {
+}else {
 $this->session->set_flashdata('error','Invalid login details.Please try again.');
 redirect('signin');
-}
+   }
 } else{
 $this->load->view('signin');	
 }
